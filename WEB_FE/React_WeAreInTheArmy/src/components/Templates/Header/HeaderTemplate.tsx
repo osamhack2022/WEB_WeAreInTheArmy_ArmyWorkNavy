@@ -1,14 +1,16 @@
 import FlexContainer from '../../UI/FlexContantainer';
 import HeaderLogo from './atom/HeaderLogo';
-import HeaderContents from './molecule/HeaderContents';
+import HeaderMenu from './molecule/HeaderMenu';
 
 export default function HeaderTemplate() {
   return (
-    <div>
+    <div className="border-b-2 box-border">
       <header className="w-screen h-[80px]">
-        <FlexContainer className="items-center">
-          <HeaderLogo />
-          <HeaderContents />
+        <FlexContainer className="justify-center h-full">
+          <FlexContainer className="items-center min-w-[800px] justify-around">
+            <HeaderLogo />
+            <HeaderMenu />
+          </FlexContainer>
         </FlexContainer>
       </header>
     </div>
