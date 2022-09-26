@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import HeaderTemplate from './components/Templates/Header/HeaderTemplate';
+import MainTemplate from './components/Templates/Main/MainTemplate';
 import FlexContainer from './components/UI/FlexContantainer';
-import { URL } from './data/url';
 
 function App() {
   console.log(window.location);
@@ -11,9 +11,7 @@ function App() {
       <FlexContainer className="justify-center items-center h-full">
         <FlexContainer className="min-w-[800px]">
           <Routes>
-            {URL.map(({ to, name }) => (
-              <Route key={to} path={to} element={<div>{name}</div>} />
-            ))}
+            <Route path="/" element={<MainTemplate />} />
           </Routes>
         </FlexContainer>
       </FlexContainer>
