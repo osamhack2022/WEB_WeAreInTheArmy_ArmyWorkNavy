@@ -1,20 +1,22 @@
-import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HeaderTemplate from './components/Templates/Header/HeaderTemplate';
+import FlexContainer from './components/UI/FlexContantainer';
+import { URL } from './data/url';
 
 function App() {
   console.log(window.location);
   return (
     <div className="App h-screen">
       <HeaderTemplate />
-      <Routes>
-        <Route
-          path="/"
-          element={<div className="text-red-500">Home</div>}
-        ></Route>
-        <Route path="/hi" element={<div>hello</div>}></Route>
-        <Route path="/*" element={<div>error</div>}></Route>
-      </Routes>
+      <FlexContainer className="justify-center items-center h-full">
+        <FlexContainer className="min-w-[800px]">
+          <Routes>
+            {URL.map(({ to, name }) => (
+              <Route key={to} path={to} element={<div>{name}</div>} />
+            ))}
+          </Routes>
+        </FlexContainer>
+      </FlexContainer>
     </div>
   );
 }
