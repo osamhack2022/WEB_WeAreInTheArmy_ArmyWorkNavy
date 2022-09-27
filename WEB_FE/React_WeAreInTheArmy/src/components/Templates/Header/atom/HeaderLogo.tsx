@@ -1,10 +1,13 @@
+import FlexContainer from '../../../UI/FlexContantainer';
+
 export default function HeaderLogo() {
   return (
-    <div>
+    <FlexContainer className="items-center">
       <img
         src="../../../../../imgs/logo.jpg"
-        className="object-contain w-16 h-16"
+        className="object-contain w-16 h-16 mr-1"
       />
-    </div>
+      <div className="font-bold text-xl">여긴군대지</div>
+    </FlexContainer>
   );
 }

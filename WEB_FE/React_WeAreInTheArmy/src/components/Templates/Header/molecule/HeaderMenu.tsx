@@ -1,5 +1,5 @@
 import { URL } from '../../../../data/url';
-import Menu from '../../../UI/Menu';
+import Menu from '../atom/Menu';
 
 export default function HeaderMenu() {
   const menus = URL.slice(1);

@@ -8,7 +8,9 @@ interface Menu extends React.LiHTMLAttributes<HTMLLIElement> {
 export default function Menu({ name, to, ...props }: Menu) {
   return (
     <li {...props}>
-      <Link to={to}>{name}</Link>
+      <Link to={to}>
+        <strong>{name}</strong>
+      </Link>
     </li>
   );
 }

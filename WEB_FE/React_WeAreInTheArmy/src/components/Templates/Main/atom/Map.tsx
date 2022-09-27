@@ -28,7 +28,7 @@ const Map = () => {
 
   return (
     <div className="w-full h-full">
-      <div id="map" className="w-[100px] h-[100px]"></div>
+      <div id="map" className="w-[800px] h-[500px]"></div>
     </div>
   );
 };
