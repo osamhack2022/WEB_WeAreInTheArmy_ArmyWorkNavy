@@ -8,7 +8,7 @@ module.exports = {
         "secondary": "#A42116",
         "paper": "#F7F4F3",
         "introduce": "#E3CDC5h",
-        "btn": "#F0823F",
+        "orrange": "#F0823F",
         
       },
       fontFamily: {

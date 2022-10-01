@@ -18,7 +18,7 @@ export default function Button({ size, children, ...props }: ButtonProps) {
           'text-base': size === 'base',
           'text-xl': size === 'lg',
         },
-        'bg-btn',
+        'bg-orrange',
         'text-white',
         'mb-1',
         'rounded-lg',

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import HeaderTemplate from './components/Templates/Header/HeaderTemplate';
+import IntroduceTemplate from './components/Templates/Introduce/IntroduceTemplate';
 import LoginTemplate from './components/Templates/Login/LoginTemplate';
 import MainTemplate from './components/Templates/Main/MainTemplate';
 import SignupTemplate from './components/Templates/Signup/SignupTemplate';
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<MainTemplate />} />
             <Route path="/login" element={<LoginTemplate />} />
             <Route path="/signup" element={<SignupTemplate />} />
+            <Route path="/introduce" element={<IntroduceTemplate />} />
           </Routes>
         </FlexContainer>
       </FlexContainer>

@@ -10,10 +10,27 @@ export default function SignupTemplate() {
   const handleChangeId = (newId: string) => {
     setId(newId);
   };
+
   const [password, setPassword] = useState<string>('');
   const handleChangePassword = (newPassword: string) => {
     setPassword(newPassword);
   };
+
+  const [passwordCheck, setPasswordCheck] = useState<string>('');
+  const handleChangePasswordCheck = (newPasswordCheck: string) => {
+    setPasswordCheck(newPasswordCheck);
+  };
+
+  const [email, setEmail] = useState<string>('');
+  const handleChangeEmail = (newEmail: string) => {
+    setEmail(newEmail);
+  };
+
+  const [phone, setPhone] = useState<string>('');
+  const handleChangePhone = (newPhone: string) => {
+    setPhone(newPhone);
+  };
+
   return (
     <FlexContainer className="mt-[100px]">
       <Paper className="w-[900px] h-[700px] justify-evenly">
@@ -69,38 +86,38 @@ export default function SignupTemplate() {
                 className="w-[400px] h-[50px] "
               />
               <Input
-                value={id}
+                value={password}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  handleChangeId(event.target.value)
+                  handleChangePassword(event.target.value)
                 }
-                type="text"
+                type="password"
                 placeholder="Password (영문, 숫자, 특수문자 포함 8자 이상)"
                 className="w-[400px] h-[50px] "
               />
               <Input
-                value={id}
+                value={passwordCheck}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  handleChangeId(event.target.value)
+                  handleChangePasswordCheck(event.target.value)
                 }
-                type="text"
+                type="password"
                 className="w-[400px] h-[50px] "
               />
               <Input
-                value={id}
+                value={email}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  handleChangeId(event.target.value)
+                  handleChangeEmail(event.target.value)
                 }
-                type="text"
+                type="email"
                 placeholder="gundaemin@mnd.com"
                 className="w-[400px] h-[50px] "
               />
               <Input
-                value={id}
+                value={phone}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  handleChangeId(event.target.value)
+                  handleChangePhone(event.target.value)
                 }
-                type="text"
-                placeholder="ID"
+                type="tel"
+                placeholder="전화번호"
                 className="w-[400px] h-[50px] "
               />
             </FlexContainer>
