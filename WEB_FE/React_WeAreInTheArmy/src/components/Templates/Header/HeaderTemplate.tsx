@@ -22,11 +22,12 @@ export default function HeaderTemplate() {
           </Text>
         </FlexContainer>
         <FlexContainer className="justify-center h-3/4 bg-main drop-shadow-lg">
-          <FlexContainer className="items-center min-w-[800px] justify-around">
+          <FlexContainer className="items-center w-full justify-around ">
             <div onClick={onClickNavi} className="cursor-pointer">
               <HeaderLogo />
             </div>
             <HeaderMenu />
+            <div></div>
           </FlexContainer>
         </FlexContainer>
       </header>
