@@ -66,7 +66,7 @@ export default function SignupTemplate() {
                 }
                 type="text"
                 placeholder="ID"
-                className="w-[300px] h-[50px] "
+                className="w-[400px] h-[50px] "
               />
               <Input
                 value={id}
@@ -75,7 +75,7 @@ export default function SignupTemplate() {
                 }
                 type="text"
                 placeholder="Password (영문, 숫자, 특수문자 포함 8자 이상)"
-                className="w-[300px] h-[50px] "
+                className="w-[400px] h-[50px] "
               />
               <Input
                 value={id}
@@ -83,7 +83,7 @@ export default function SignupTemplate() {
                   handleChangeId(event.target.value)
                 }
                 type="text"
-                className="w-[300px] h-[50px] "
+                className="w-[400px] h-[50px] "
               />
               <Input
                 value={id}
@@ -92,7 +92,7 @@ export default function SignupTemplate() {
                 }
                 type="text"
                 placeholder="gundaemin@mnd.com"
-                className="w-[300px] h-[50px] "
+                className="w-[400px] h-[50px] "
               />
               <Input
                 value={id}
@@ -101,7 +101,7 @@ export default function SignupTemplate() {
                 }
                 type="text"
                 placeholder="ID"
-                className="w-[300px] h-[50px] "
+                className="w-[400px] h-[50px] "
               />
             </FlexContainer>
           </FlexContainer>

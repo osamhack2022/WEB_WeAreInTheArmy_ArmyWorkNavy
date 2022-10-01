@@ -8,7 +8,8 @@ module.exports = {
         "secondary": "#A42116",
         "paper": "#F7F4F3",
         "introduce": "#E3CDC5h",
-        "btn": "#F0823F"
+        "btn": "#F0823F",
+        
       },
       fontFamily: {
         Euljiro: ["BMEULJIRO"],
@@ -16,6 +17,19 @@ module.exports = {
       },
       lineHeight: {
         '12': '3rem',
+      },
+      fontWeight: {
+        "hairline": 100,
+        'extra-light': 100,
+        "thin": 200,
+        "light": 300,
+        "normal": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700,
+        "extrabold": 800,
+        'extra-bold': 800,
+        "black": 900,
       }
     },
   },
