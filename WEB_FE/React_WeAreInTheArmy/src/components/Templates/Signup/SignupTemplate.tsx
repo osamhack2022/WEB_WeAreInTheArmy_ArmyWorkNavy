@@ -32,7 +32,7 @@ export default function SignupTemplate() {
   };
 
   return (
-    <FlexContainer className="mt-[100px]">
+    <FlexContainer className="mt-[50px]">
       <Paper className="w-[900px] h-[700px] justify-evenly">
         <div className="w-full text-center mt-5">
           <Text size="text-3xl" className="font-bold">

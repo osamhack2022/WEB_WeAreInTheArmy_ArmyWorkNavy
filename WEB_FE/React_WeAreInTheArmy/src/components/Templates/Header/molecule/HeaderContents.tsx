@@ -1,4 +1,3 @@
-import ContactUs from '../atom/ContactUs';
 import HeaderMenu from './HeaderMenu';
 
 export default function HeaderContents() {
