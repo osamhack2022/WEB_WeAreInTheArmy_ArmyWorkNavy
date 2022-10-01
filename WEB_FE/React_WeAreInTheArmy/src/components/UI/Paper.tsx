@@ -11,7 +11,7 @@ export default function Paper({ children, ...props }: PaperProps) {
     <FlexContainer
       className={classNames(
         'flex-col',
-        'bg-paper-main',
+        'bg-paper',
         'shadow-md',
         'shadow-slate-300',
         'items-center',

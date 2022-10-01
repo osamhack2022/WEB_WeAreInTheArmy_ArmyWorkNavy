@@ -5,12 +5,17 @@ module.exports = {
     extend: {
       colors: {
         "main": "#F7EFE8",
-        "seconddary": "#A42116",
+        "secondary": "#A42116",
         "paper": "#F7F4F3",
-        "introduce": "#E3CDC5h"
+        "introduce": "#E3CDC5h",
+        "btn": "#F0823F"
       },
       fontFamily: {
+        Euljiro: ["BMEULJIRO"],
         NotoSansKR: ["Noto Sans KR", "cursive"]
+      },
+      lineHeight: {
+        '12': '3rem',
       }
     },
   },

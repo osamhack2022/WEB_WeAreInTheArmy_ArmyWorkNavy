@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../UI/Button';
 import Divider from '../../UI/Divider';
 import FlexContainer from '../../UI/FlexContantainer';
 import Input from '../../UI/Input';
@@ -17,8 +19,8 @@ export default function LoginTemplate() {
 
   return (
     <FlexContainer className="mt-[100px] ">
-      <Paper className="w-[900px] h-[500px] justify-around">
-        <div className="w-full text-center">
+      <Paper className="w-[900px] h-[500px] justify-evenly">
+        <div className="w-full text-center mt-5">
           <Text size="text-3xl" className="font-bold">
             로그인
           </Text>
@@ -31,7 +33,9 @@ export default function LoginTemplate() {
             </Text>
             <Input
               value={id}
-              handleChange={handleChangeId}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                handleChangeId(event.target.value)
+              }
               type="text"
               placeholder="ID"
               className="w-[300px] h-[50px] "
@@ -43,7 +47,9 @@ export default function LoginTemplate() {
             </Text>
             <Input
               value={password}
-              handleChange={handleChangePassword}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                handleChangePassword(event.target.value)
+              }
               type="password"
               placeholder="Password"
               className="w-[300px] h-[50px]"
@@ -51,11 +57,14 @@ export default function LoginTemplate() {
           </FlexContainer>
         </FlexContainer>
         <FlexContainer className="flex-col justify-center ">
-          <button className="bg-primary p-3 rounded-lg text-white mb-1">
+          <Button size="base" className="mb-3">
             로그인하기
-          </button>
-          <Text size="text-sm" className="text-">
-            아이디가 없으신가요? 회원가입하기
+          </Button>
+          <Text size="text-sm" className="text-slate-400">
+            아이디가 없으신가요?
+            <span className="font-bold underline">
+              <Link to="/signup">회원가입하기</Link>
+            </span>
           </Text>
         </FlexContainer>
       </Paper>
