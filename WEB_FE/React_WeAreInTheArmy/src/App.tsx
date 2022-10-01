@@ -14,12 +14,14 @@ function App() {
   return (
     <div className="App h-screen font-Noto Sans KR">
       <HeaderTemplate />
-      <FlexContainer className="items-center h-full flex-col bg-main">
+      <FlexContainer className="items-center flex-col bg-main">
         <FlexContainer className="min-w-[800px] w-full flex-col items-center">
-          <div className="w-[800px] text-slate-400 mt-[30px]">
-            여긴 군대지 &gt;{' '}
-            <span className="text-orrange font-semi">{title?.name}</span>
-          </div>
+          {title?.name !== '메인' && (
+            <div className="w-[800px] text-slate-400 mt-[30px]">
+              여긴 군대지 &gt;{' '}
+              <span className="text-orrange font-semi">{title?.name}</span>
+            </div>
+          )}
           <Routes>
             <Route path="/" element={<MainTemplate />} />
             <Route path="/login" element={<LoginTemplate />} />

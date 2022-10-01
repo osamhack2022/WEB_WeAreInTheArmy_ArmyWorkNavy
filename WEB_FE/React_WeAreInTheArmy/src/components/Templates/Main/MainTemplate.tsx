@@ -1,43 +1,38 @@
+import { useState } from 'react';
 import FlexContainer from '../../UI/FlexContantainer';
+import Text from '../../UI/Text';
 import Map from './atom/Map';
+import Actions from './molecule/Actions';
+import '../../../../public/assets/imgs/MainPage/Main.png';
+import Button from '../../UI/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainTemplate() {
+  const [count, setCount] = useState<number>(0);
+  const navigate = useNavigate();
   return (
-    <div className="w-full h-full mt-[50px]">
+    <div className="w-full h-full">
       <FlexContainer className="flex-col">
         <FlexContainer>
-          <div></div>
+          <div>
+            <img src="../../../../public/assets/imgs/MainPage/Main.png" />
+          </div>
         </FlexContainer>
-        <FlexContainer className="w-full bg-white justify-center">
-          <FlexContainer className="w-[800px] justify-between">
-            <FlexContainer className="flex-col items-center w-[200px] text-center">
-              <img src="../../../../public/assets/imgs/MainPage/icon_fire.png" />
-              <div>
-                신속하고 정확하게 <br /> 효율적으로 재난 피해 회복
-              </div>
-            </FlexContainer>
-            <FlexContainer className="flex-col items-center w-[200px] text-center">
-              <img src="../../../../public/assets/imgs/MainPage/icon_fire.png" />
-              <div>
-                신속하고 정확하게 <br /> 효율적으로 재난 피해 회복
-              </div>
-            </FlexContainer>
-            <FlexContainer className="flex-col items-center w-[200px] text-center">
-              <img src="../../../../public/assets/imgs/MainPage/icon_fire.png" />
-              <div>
-                신속하고 정확하게 <br /> 효율적으로 재난 피해 회복
-              </div>
-            </FlexContainer>
-            <FlexContainer className="flex-col items-center w-[200px] text-center">
-              <img src="../../../../public/assets/imgs/MainPage/icon_fire.png" />
-              <div>
-                신속하고 정확하게 <br /> 효율적으로 재난 피해 회복
-              </div>
-            </FlexContainer>
-          </FlexContainer>
-        </FlexContainer>
-        <FlexContainer className="w-full justify-center">
+        <Actions />
+        <FlexContainer className="w-full flex-col items-center mb-10">
+          <Text
+            size="text-4xl"
+            className="text-secondary mt-10 mb-2 font-medium"
+          >
+            현재 {count}곳에서 도움을 요청중입니다.
+          </Text>
+          <Text size="text-base" className="mb-3">
+            최대한 빨리 조치할 수 있도록 노력하겠습니다.
+          </Text>
           <Map />
+          <Button size="lg" onClick={() => navigate('/apply')}>
+            신청하기
+          </Button>
         </FlexContainer>
       </FlexContainer>
     </div>

@@ -9,7 +9,6 @@ module.exports = {
         "paper": "#F7F4F3",
         "introduce": "#E3CDC5h",
         "orrange": "#F0823F",
-        
       },
       fontFamily: {
         Euljiro: ["BMEULJIRO"],
