@@ -1,6 +1,6 @@
 # 여긴군대지(여긴 군 대민지원) - 온라인 군 대민지원 연결 플랫폼\
 <center>
-![여긴 군대지 로고](https://user-images.githubusercontent.com/78669550/193375765-98e1234b-9095-4ca7-b136-b71c0fb4ea59.png)ㅇ
+![여긴 군대지 로고](https://user-images.githubusercontent.com/78669550/193375765-98e1234b-9095-4ca7-b136-b71c0fb4ea59.png)
 
 </center>
 
