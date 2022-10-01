@@ -5,7 +5,7 @@ import Text from '../../UI/Text';
 export default function IntroduceTemplate() {
   return (
     <FlexContainer className="mt-[50px] ">
-      <Paper className="w-[900px] h-[50vh]">
+      <Paper className="w-full h-[50vh]">
         <FlexContainer className="h-[200px] flex-col justify-evenly">
           <Text size="text-4xl" className="font-semibold">
             여긴 군대지 사업소개

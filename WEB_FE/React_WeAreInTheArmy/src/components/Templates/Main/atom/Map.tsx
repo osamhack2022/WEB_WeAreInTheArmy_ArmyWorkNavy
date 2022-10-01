@@ -27,7 +27,7 @@ const Map = () => {
   mapScript.addEventListener('load', onLoadKakaoMap);
 
   return (
-    <div className="w-full h-full">
+    <div className="p-5 h-full">
       <div id="map" className="w-[800px] h-[500px]"></div>
     </div>
   );

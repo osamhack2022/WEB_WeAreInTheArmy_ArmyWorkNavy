@@ -15,8 +15,8 @@ function App() {
     <div className="App h-screen font-Noto Sans KR">
       <HeaderTemplate />
       <FlexContainer className="items-center h-full flex-col bg-main">
-        <FlexContainer className="min-w-[800px] flex-col">
-          <div className="text-slate-400 mt-[30px]">
+        <FlexContainer className="min-w-[800px] w-full flex-col items-center">
+          <div className="w-[800px] text-slate-400 mt-[30px]">
             여긴 군대지 &gt;{' '}
             <span className="text-orrange font-semi">{title?.name}</span>
           </div>
