@@ -1,25 +1,20 @@
 const Sequelize = require("sequelize");
-const UserAccounts = require("./userAccounts");
-const UserInfo = require("./userInfo");
-const ClientRequests = require("./clientRequest");
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
 const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
+
+db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.UserAccounts = UserAccounts;
-db.UserInfo = UserInfo;
-db.ClientRequest = ClientRequests;
+const initModels = require("./init-models");
 
-UserAccounts.init(sequelize);
-UserInfo.init(sequelize);
-ClientRequests.init(sequelize);
+const {userAccount, userInfo, clientRequest} = initModels(sequelize);
 
-UserAccounts.associate(db);
-UserInfo.associate(db);
-ClientRequests.associate(db);
+db.userAccount = userAccount;
+db.userInfo = userInfo;
+db.clientRequest = clientRequest;
 
 module.exports = db;

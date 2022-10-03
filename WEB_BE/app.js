@@ -1,23 +1,39 @@
 /* import modules */
 const express = require("express");
-const path = require("path");
 const morgan = require("morgan");
+const { sequelize } = require("./models");
 
-/* start sequelize object */
-const { sequelize } = require("./models/index.js");
-sequelize
-    .sync({ force: true })
-    .then(() => {
-        console.log("Connected to database.");
-    })
-    .catch((err) => {
-        console.error(err);
-    });
+const dotenv = require("dotenv");
+const passportConfig = require("passport");
+const path = require("path");
+
+dotenv.config();
+passportConfig();
+
+const router = require("./routes");
 
 /* start express object */
 const app = express();
+sequelize.sync();
+
 app.set("port", process.env.PORT || 3000);
 app.use(morgan("dev"), express.json(), express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+        httpOnly: true,
+        secure: false,
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use("/", router);
 
 app.use((err, req, res, next) => {
     res.status(err.status||500).send("error");
