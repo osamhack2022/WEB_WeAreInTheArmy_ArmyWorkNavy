@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../../../../public/assets/imgs/MainPage/Main.png';
+import Button from '../../UI/Button';
 import FlexContainer from '../../UI/FlexContantainer';
 import Text from '../../UI/Text';
 import Map from './atom/Map';
 import Actions from './molecule/Actions';
-import '../../../../public/assets/imgs/MainPage/Main.png';
-import Button from '../../UI/Button';
-import { useNavigate } from 'react-router-dom';
 
 export default function MainTemplate() {
   const [count, setCount] = useState<number>(0);

@@ -44,4 +44,8 @@ export const Url = [
     name: '로그인',
     to: '/login',
   },
+  {
+    name: '지원하기',
+    to: '/apply',
+  },
 ];

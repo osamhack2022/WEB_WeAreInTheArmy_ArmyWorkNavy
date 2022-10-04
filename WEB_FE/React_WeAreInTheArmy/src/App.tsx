@@ -1,4 +1,5 @@
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import ApplyTemplate from './components/Templates/Apply/ApplyTemplate';
 import HeaderTemplate from './components/Templates/Header/HeaderTemplate';
 import IntroduceTemplate from './components/Templates/Introduce/IntroduceTemplate';
 import LoginTemplate from './components/Templates/Login/LoginTemplate';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/login" element={<LoginTemplate />} />
             <Route path="/signup" element={<SignupTemplate />} />
             <Route path="/introduce" element={<IntroduceTemplate />} />
+            <Route path="/apply" element={<ApplyTemplate />} />
           </Routes>
         </FlexContainer>
       </FlexContainer>
