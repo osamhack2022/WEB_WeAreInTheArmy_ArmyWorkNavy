@@ -12,6 +12,7 @@ export default function Button({ size, children, ...props }: ButtonProps) {
   //className="bg-primary p-3 rounded-lg text-white mb-1"
   return (
     <button
+      {...props}
       className={classNames(
         {
           'text-xs': size === 'sm',

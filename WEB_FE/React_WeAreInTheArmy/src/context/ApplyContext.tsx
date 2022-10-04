@@ -1,4 +1,4 @@
-import { createContext, Dispatch, useReducer } from 'react';
+import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 
 type DefaultInfomationState = {
   name: string;
@@ -7,7 +7,7 @@ type DefaultInfomationState = {
   location?: string;
 };
 
-type RequestCategory = '재난구조' | '환호보호' | '교육/의료/문화';
+export type RequestCategory = '재난구조' | '환호보호' | '교육/의료/문화';
 
 type ApplyDataState = {
   title: string;
@@ -112,5 +112,57 @@ export function DefaultInformationProvider({
         {children}
       </DefaultInformationDispatchContext.Provider>
     </DefaultInfomationStateContext.Provider>
+  );
+}
+
+export function ApplyDataProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(ApplyDataReducer, {
+    title: '',
+    requestCategory: '재난구조',
+    description: '',
+  });
+
+  return (
+    <ApplyDataStateContext.Provider value={state}>
+      <ApplyDataDispatchContext.Provider value={dispatch}>
+        {children}
+      </ApplyDataDispatchContext.Provider>
+    </ApplyDataStateContext.Provider>
+  );
+}
+
+export function useDefaultInformationState() {
+  const state = useContext(DefaultInfomationStateContext);
+  if (!state) throw new Error('Cannot find DefaultInfomationProvider'); // 유효하지 않을땐 에러를 발생
+  return state;
+}
+
+export function useDefaultInfomationDispatch() {
+  const dispatch = useContext(DefaultInformationDispatchContext);
+  if (!dispatch) throw new Error('Cannot find SampleProvider'); // 유효하지 않을땐 에러를 발생
+  return dispatch;
+}
+
+export function useApplyDataState() {
+  const state = useContext(ApplyDataStateContext);
+  if (!state) throw new Error('Cannot find ApplyDataProvider'); // 유효하지 않을땐 에러를 발생
+  return state;
+}
+
+export function useeApplyDataDispatch() {
+  const dispatch = useContext(ApplyDataDispatchContext);
+  if (!dispatch) throw new Error('Cannot find ApplyDataProvider'); // 유효하지 않을땐 에러를 발생
+  return dispatch;
+}
+
+export default function ApplyContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <DefaultInformationProvider>
+      <ApplyDataProvider>{children}</ApplyDataProvider>
+    </DefaultInformationProvider>
   );
 }

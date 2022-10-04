@@ -30,7 +30,12 @@ export default function MainTemplate() {
             최대한 빨리 조치할 수 있도록 노력하겠습니다.
           </Text>
           <Map />
-          <Button size="lg" onClick={() => navigate('/apply')}>
+          <Button
+            size="lg"
+            onClick={() => {
+              navigate('/apply');
+            }}
+          >
             신청하기
           </Button>
         </FlexContainer>
