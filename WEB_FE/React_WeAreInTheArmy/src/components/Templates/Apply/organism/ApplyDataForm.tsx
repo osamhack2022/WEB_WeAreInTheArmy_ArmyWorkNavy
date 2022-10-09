@@ -18,7 +18,7 @@ export default function ApplyDataForm() {
     dispatch({ type: 'SET_DESCRIPTION', description: value });
 
   return (
-    <div>
+    <div className="mb-4">
       <Text size="text-3xl" className="font-bold p-4">
         2. 신청 내용
       </Text>

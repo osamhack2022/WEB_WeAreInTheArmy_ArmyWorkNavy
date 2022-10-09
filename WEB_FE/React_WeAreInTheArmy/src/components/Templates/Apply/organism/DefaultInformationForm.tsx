@@ -14,7 +14,7 @@ export default function DefaultInformationForm() {
   const setLocation = (value: string) =>
     dispatch({ type: 'SET_LOCATION', location: value });
   return (
-    <div>
+    <div className="mb-4">
       <Text size="text-3xl" className="font-bold p-4">
         1. 기본 정보
       </Text>
