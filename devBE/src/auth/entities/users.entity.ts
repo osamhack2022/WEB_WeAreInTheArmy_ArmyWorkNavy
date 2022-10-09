@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export enum AccountTypes {
@@ -10,12 +11,15 @@ export enum AccountTypes {
 @Entity()
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
+    @ApiProperty({description: "[primary] index"})
     idx: number;
 
     @Column({ unique: true })
+    @ApiProperty({description: "[unique] identifier"})
     identifier: string;
 
     @Column()
+    @ApiProperty({description: "password"})
     password: string;
 
     @Column({
@@ -23,26 +27,34 @@ export class User extends BaseEntity {
         enum: AccountTypes,
         default: AccountTypes.DEFAULT,
     })
+    @ApiProperty({description: "account type: administrator, citizen, millitary"})
     type: AccountTypes;
 
     @Column()
+    @ApiProperty({description: "user name"})
     name: string;
 
     @Column()
+    @ApiProperty({description: "phone number"})
     phone: string;
 
     @Column({ nullable: true })
+    @ApiProperty({description: "[opt] organization"})
     organization: string;
 
     @Column({ nullable: true })
+    @ApiProperty({description: "[opt] email"})
     email: string;
 
     @Column({ nullable: true })
+    @ApiProperty({description: "[opt] address"})
     address: string;
 
     @CreateDateColumn()
+    @ApiProperty({description: "createdAt - auto created"})
     createdAt: Date;
 
     @UpdateDateColumn()
+    @ApiProperty({description: "updatedAt - auto created"})
     updatedAt: Date;
 }

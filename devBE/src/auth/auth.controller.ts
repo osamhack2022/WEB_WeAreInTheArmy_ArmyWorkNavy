@@ -4,23 +4,28 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateAuthDto } from './dto/update-user.dto';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('api/auth/')
+@ApiTags("Users and Authentication API")
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
   @Post('/signup')
+  @ApiOperation({ summary: "createUser API" })
   signUp(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<void> {
     return this.authService.signUp(createUserDto);
   }
 
   @Post('/signin')
-  signIn(@Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto): Promise<{accessToken: string}> {
+  @ApiOperation({ summary: "authenticateCredentials API" })
+  signIn(@Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
     return this.authService.signIn(authCredentialsDto);
-  } 
+  }
 
   @Post('/test')
   @UseGuards(AuthGuard())
+  @ApiOperation({ summary: "get user object from authenticated client API" })
   test(@Req() req) {
     console.log('req', req.user);
   }
