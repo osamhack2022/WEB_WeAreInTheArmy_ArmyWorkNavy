@@ -4,7 +4,9 @@ import {
 } from '../../../../context/ApplyContext';
 import FlexContainer from '../../../UI/FlexContantainer';
 import Text from '../../../UI/Text';
-import DefaultInformationInput from '../atom/DefaultInformationInput';
+import DescriptionArea from '../molecule/DescriptionArea';
+import RequestCategorySelect from '../molecule/RequestCategorySelect';
+import TitleInput from '../molecule/TitleInput';
 
 export default function ApplyDataForm() {
   const dispatch = useeApplyDataDispatch();
@@ -20,24 +22,18 @@ export default function ApplyDataForm() {
       <Text size="text-3xl" className="font-bold p-4">
         2. 신청 내용
       </Text>
-      <FlexContainer className="flex-col h-[250px] justify-between">
-        <DefaultInformationInput
+      <FlexContainer className="flex-col h-[200px] justify-between">
+        <TitleInput
           label="제목"
-          placeholder={'제목을 입력해주세요.'}
+          placeholder="제목을 입력해주세요"
           dispatch={setTitle}
-          isEssential
         />
-        <DefaultInformationInput
-          label="요청 종류"
-          placeholder={'기업/기관명을 입력해주세요.'}
+        <RequestCategorySelect
+          label="요청분류"
+          options={[]}
           dispatch={setRequestCategory}
         />
-        <DefaultInformationInput
-          label="문의내용"
-          placeholder={'문의내용을 입력해주세요'}
-          dispatch={setDescription}
-          isEssential
-        />
+        <DescriptionArea label="내용" dispatch={setDescription} />
       </FlexContainer>
     </div>
   );
