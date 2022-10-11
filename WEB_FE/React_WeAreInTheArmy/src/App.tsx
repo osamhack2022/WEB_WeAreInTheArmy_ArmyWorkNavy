@@ -6,6 +6,7 @@ import LoginTemplate from './components/Templates/Login/LoginTemplate';
 import MainTemplate from './components/Templates/Main/MainTemplate';
 import SignupTemplate from './components/Templates/Signup/SignupTemplate';
 import FlexContainer from './components/UI/FlexContantainer';
+import TemplateWrapper from './components/UI/TemplateWrapper';
 import ApplyContextProvider from './context/ApplyContext';
 import { Url } from './data/url';
 
@@ -24,20 +25,22 @@ function App() {
               <span className="text-orrange font-semi">{title?.name}</span>
             </div>
           )}
-          <Routes>
-            <Route path="/" element={<MainTemplate />} />
-            <Route path="/login" element={<LoginTemplate />} />
-            <Route path="/signup" element={<SignupTemplate />} />
-            <Route path="/introduce" element={<IntroduceTemplate />} />
-            <Route
-              path="/apply"
-              element={
-                <ApplyContextProvider>
-                  <ApplyTemplate />
-                </ApplyContextProvider>
-              }
-            />
-          </Routes>
+          <TemplateWrapper>
+            <Routes>
+              <Route path="/" element={<MainTemplate />} />
+              <Route path="/login" element={<LoginTemplate />} />
+              <Route path="/signup" element={<SignupTemplate />} />
+              <Route path="/introduce" element={<IntroduceTemplate />} />
+              <Route
+                path="/apply"
+                element={
+                  <ApplyContextProvider>
+                    <ApplyTemplate />
+                  </ApplyContextProvider>
+                }
+              />
+            </Routes>
+          </TemplateWrapper>
         </FlexContainer>
       </FlexContainer>
     </div>

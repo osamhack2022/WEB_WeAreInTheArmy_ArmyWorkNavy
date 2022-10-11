@@ -1,6 +1,5 @@
 import { useDefaultInfomationDispatch } from '../../../../context/ApplyContext';
 import FlexContainer from '../../../UI/FlexContantainer';
-import Input from '../../../UI/Input';
 import Text from '../../../UI/Text';
 import DefaultInformationInput from '../atom/DefaultInformationInput';
 
@@ -15,11 +14,11 @@ export default function DefaultInformationForm() {
   const setLocation = (value: string) =>
     dispatch({ type: 'SET_LOCATION', location: value });
   return (
-    <div>
+    <div className="mb-4">
       <Text size="text-3xl" className="font-bold p-4">
         1. 기본 정보
       </Text>
-      <FlexContainer className="flex-col h-[250px] justify-between">
+      <FlexContainer className="flex-col h-[240px] justify-between">
         <DefaultInformationInput
           label="이름"
           placeholder={'이름을 입력해주세요.'}

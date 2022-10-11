@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../UI/Button';
-import Divider from '../../UI/Divider';
 import FlexContainer from '../../UI/FlexContantainer';
 import Input from '../../UI/Input';
 import Paper from '../../UI/Paper';
