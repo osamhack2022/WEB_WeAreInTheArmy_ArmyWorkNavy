@@ -5,6 +5,7 @@ import IntroduceTemplate from './components/Templates/Introduce/IntroduceTemplat
 import LoginTemplate from './components/Templates/Login/LoginTemplate';
 import MainTemplate from './components/Templates/Main/MainTemplate';
 import SignupTemplate from './components/Templates/Signup/SignupTemplate';
+import StatusTemplate from './components/Templates/Status/StatusTemplate';
 import FlexContainer from './components/UI/FlexContantainer';
 import TemplateWrapper from './components/UI/TemplateWrapper';
 import ApplyContextProvider from './context/ApplyContext';
@@ -25,10 +26,14 @@ function App() {
               <span className="text-orrange font-semi">{title?.name}</span>
             </div>
           )}
+
+          <Routes>
+            <Route path="/" element={<MainTemplate />} />
+          </Routes>
           <TemplateWrapper>
             <Routes>
-              <Route path="/" element={<MainTemplate />} />
               <Route path="/login" element={<LoginTemplate />} />
+              <Route path="/status" element={<StatusTemplate />} />
               <Route path="/signup" element={<SignupTemplate />} />
               <Route path="/introduce" element={<IntroduceTemplate />} />
               <Route

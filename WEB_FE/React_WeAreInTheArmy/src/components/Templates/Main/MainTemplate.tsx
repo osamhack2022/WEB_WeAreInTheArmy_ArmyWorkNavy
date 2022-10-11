@@ -34,6 +34,7 @@ export default function MainTemplate() {
             size="lg"
             onClick={() => {
               navigate('/apply');
+              r;
             }}
           >
             신청하기
