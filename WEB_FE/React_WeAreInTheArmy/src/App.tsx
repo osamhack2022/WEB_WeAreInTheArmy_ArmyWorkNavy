@@ -1,4 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
+import AdminTemplate from './components/Templates/Admin/AdminTemplate';
 import ApplyTemplate from './components/Templates/Apply/ApplyTemplate';
 import HeaderTemplate from './components/Templates/Header/HeaderTemplate';
 import IntroduceTemplate from './components/Templates/Introduce/IntroduceTemplate';
@@ -44,6 +45,7 @@ function App() {
                   </ApplyContextProvider>
                 }
               />
+              <Route path="/admin" element={<AdminTemplate />} />
             </Routes>
           </TemplateWrapper>
         </FlexContainer>

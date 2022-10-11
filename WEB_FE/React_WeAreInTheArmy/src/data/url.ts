@@ -17,7 +17,7 @@ export const URL = [
   },
   {
     name: '대민지원문의',
-    to: '/inquiry',
+    to: '/apply',
     src: '../../public/assets/imgs/Header/messages.png',
   },
 ];

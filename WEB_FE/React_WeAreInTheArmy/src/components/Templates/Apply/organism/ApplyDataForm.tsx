@@ -30,7 +30,7 @@ export default function ApplyDataForm() {
         />
         <RequestCategorySelect
           label="요청분류"
-          options={[]}
+          options={[{ label: 'help', value: 'help' }]}
           dispatch={setRequestCategory}
         />
         <DescriptionArea label="내용" dispatch={setDescription} />

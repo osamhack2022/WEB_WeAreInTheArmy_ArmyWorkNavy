@@ -5,5 +5,9 @@ type OptionProps = {
 };
 
 export default function Option({ value, children }: OptionProps & HasChild) {
-  return <option value={value}>{children}</option>;
+  return (
+    <option value={value} className="p-5">
+      {children}
+    </option>
+  );
 }
