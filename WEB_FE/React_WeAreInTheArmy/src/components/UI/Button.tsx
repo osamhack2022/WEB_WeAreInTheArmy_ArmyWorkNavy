@@ -4,11 +4,15 @@ import React from 'react';
 type ButtonSize = 'sm' | 'base' | 'lg';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size: ButtonSize;
+  size?: ButtonSize;
   children: React.ReactNode;
 }
 
-export default function Button({ size, children, ...props }: ButtonProps) {
+export default function Button({
+  size = 'base',
+  children,
+  ...props
+}: ButtonProps) {
   //className="bg-primary p-3 rounded-lg text-white mb-1"
   return (
     <button

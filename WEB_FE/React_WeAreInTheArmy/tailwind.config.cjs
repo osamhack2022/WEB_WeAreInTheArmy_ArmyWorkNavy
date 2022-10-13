@@ -7,8 +7,9 @@ module.exports = {
         "main": "#F7EFE8",
         "secondary": "#A42116",
         "paper": "#F7F4F3",
-        "introduce": "#E3CDC5h",
+        "introduce": "#E3CDC5",
         "orrange": "#F0823F",
+        "error": "#DD5353"
       },
       fontFamily: {
         Euljiro: ["BMEULJIRO"],

@@ -37,15 +37,19 @@ export const Url = [
     to: '/management',
   },
   {
-    name: '대민지원문의',
-    to: '/inquiry',
-  },
-  {
     name: '로그인',
     to: '/login',
   },
   {
+    name: '회원가입',
+    to: '/signup',
+  },
+  {
     name: '지원하기',
     to: '/apply',
+  },
+  {
+    name: '지원하기',
+    to: '/status',
   },
 ];

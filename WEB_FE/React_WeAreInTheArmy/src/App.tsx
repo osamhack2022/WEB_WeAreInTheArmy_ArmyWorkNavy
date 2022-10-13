@@ -1,5 +1,4 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import AdminTemplate from './components/Templates/Admin/AdminTemplate';
 import ApplyTemplate from './components/Templates/Apply/ApplyTemplate';
 import HeaderTemplate from './components/Templates/Header/HeaderTemplate';
 import IntroduceTemplate from './components/Templates/Introduce/IntroduceTemplate';
@@ -11,10 +10,14 @@ import FlexContainer from './components/UI/FlexContantainer';
 import TemplateWrapper from './components/UI/TemplateWrapper';
 import ApplyContextProvider from './context/ApplyContext';
 import { Url } from './data/url';
+import PostTemplate from './components/Templates/Post/PostTemplate';
 
 function App() {
   const location = useLocation();
-  const title = Url.find((v) => v.to === location.pathname);
+  console.log(location.pathname.split('/')[1]);
+  const title = Url.find((v) => {
+    return v.to === '/' + location.pathname.split('/')[1];
+  });
   console.log(title);
   return (
     <div className="App h-full font-Noto Sans KR">
@@ -35,6 +38,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<LoginTemplate />} />
               <Route path="/status" element={<StatusTemplate />} />
+              <Route path="/status/:id" element={<PostTemplate />} />
               <Route path="/signup" element={<SignupTemplate />} />
               <Route path="/introduce" element={<IntroduceTemplate />} />
               <Route
@@ -45,7 +49,6 @@ function App() {
                   </ApplyContextProvider>
                 }
               />
-              <Route path="/admin" element={<AdminTemplate />} />
             </Routes>
           </TemplateWrapper>
         </FlexContainer>
