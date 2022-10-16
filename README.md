@@ -1,17 +1,24 @@
 # 여긴군대지(여긴 군 대민지원) - 온라인 군 대민지원 연결 플랫폼
-<center>
-![여긴 군대지 로고](https://user-images.githubusercontent.com/78669550/193375765-98e1234b-9095-4ca7-b136-b71c0fb4ea59.png)
-  ![logo](./logo.png)
-
+<p>
+    <img src="https://user-images.githubusercontent.com/78669550/193375765-98e1234b-9095-4ca7-b136-b71c0fb4ea59.png" />
+</p>
 "여긴 군대지" 서비스를 통해 재난에 맞서
   군과 사회가 함께 어우러 살아갈 수 있는 기회가 되었으면 합니다.
-</center>
 
 ## 기획 의도 | Service Needs
-뉴스기사1) "이종섭 국방부장관, 태풍 피해지역 찾아 대민지원 총력 지시" / 국방일보
-     내용) 우리 군 육해공군 장병 1만 7000여명 이상이 대민지원에 나섰다. 
-뉴스기사2) "해군 7전단, 제주 힌남노 피해 대민지원" / 뉴시스
-     내용) 7전단 장병 및 군무원 여명이 함께 대민지원에 나서고 있다. 
+**뉴스기사1) ["태풍 직격탄 뚫고, 국민 지키러 긴급출동"](https://www.mnd.go.kr/user/boardList.action?parent=&boardId=I_26349&siteId=mnd&page=1&search=&column=&boardType=02&albumType=&listType=&id=mnd_020107030000&boardSeq=I_10033349&command=albumView&chkBoxSeq=&chkBoxId=&chkBoxPos=&chkBoxDepth=&chkBoxFam_Seq=&warningYn=) / 국방부**    
+     내용) 군, ‘힌남노’ 피해지역 대민지원 돌입 해병대1사단, 경북 포항 지역 병력 급파    
+           한국형 상륙돌격장갑차 동원 구조작전    
+           해군항공사·7전단도 피해 복구 구슬땀    
+           육군, 부산·울산 실종자 수색·잔해 수거    
+           공군, 화재 발생 포스코 헬기 투입 구조   
+           
+**뉴스기사2) ["[공군18전비] 혈액 수급난에 너도나도 팔뚝 내밀어"](https://www.mnd.go.kr/user/boardList.action?parent=&boardId=I_26349&siteId=mnd&page=1&search=&column=&boardType=02&albumType=&listType=&id=mnd_020107030000&boardSeq=I_9809362&command=albumView&chkBoxSeq=&chkBoxId=&chkBoxPos=&chkBoxDepth=&chkBoxFam_Seq=&warningYn=) / 국방부**    
+     내용) 국가적 혈액 수급난 해소를 위한 22-2차 사랑의 헌혈 운동을 지난달 31일부터 이달 3일까지 나흘간 전개    
+           장병들은 자발적으로 행사에 참여해 공군 핵심가치 ‘헌신’을 구현    
+           
+**뉴스기사3) ["해군 7전단, 제주 힌남노 피해 대민지원"](https://www.newsis.com/view/?id=NISX20220906_0002005156) / 뉴시스**    
+     내용) 7전단 장병 및 군무원 여명이 함께 대민지원에 나서고 있다.     
 
  최근 침수 혹은 태풍과 같은 자연재해, 혹은 재난으로 인해 피해를 받는 민간지역이 많아지고 있습니다.
  
@@ -19,7 +26,7 @@
 
  누군가는 "대민지원은 군의 역할이 아니다"라고 하기도 합니다. 하지만 민간의 인원으로는 도저히 해결할 수 없고, 더욱 더 피해를 입은 주민들의 고통이 심해지기 전 도울 수 있는 것은 우리 군밖에 없다고 생각합니다. 
 
-뉴스기사3) "20년간 재난 현장 찾아가 내 일처럼... '외진 곳일수록 도움이 절실' / 경향신문
+**뉴스기사4) ["20년간 재난 현장 찾아가 내 일처럼... '외진 곳일수록 도움이 절실'](https://m.khan.co.kr/people/people-general/article/202208221148001#c2b) / 경향신문**    
 
  위 뉴스 칼럼과 같이 외진 지역같은 곳은 복구 지원에 소외되기도 합니다. "여긴 군대지" 서비스를 통해 재난에 맞서 군과 사회가 함께 어우러 살아갈 수 있는 기회가 되었으면 합니다.
  
@@ -44,10 +51,8 @@
 ## 권장 사양 | Prerequisities
 * ECMAScript 6 지원 브라우저 사용
 * 권장: Google Chrome 버젼 77 이상
-* 
-## 설치 방법 | How to Install
 
-## 튜토리얼 | Getting Started
+## 설치 방법 | How to Install
 ```bash
 $ git clone https://github.com/osamhack2022/WEB_WeAreInTheArmy_ArmyWorkNavy.git
 $ yarn or npm install
@@ -58,13 +63,14 @@ $ yarn start or npm run start
 - `Notion`
 - `Figma`
 ### Front-end
- -  react.js, vue.js 등 사용한 front-end 프레임워크 
+ -  Typescript
+ -  React.js 
  -  UI framework
 ### Back-end
 - `Azure`
 - `NextJS`
 - DB
-> 더 자세한 내용은 세부 폴더의 `READ.md` 확인 바랍니다.
+
 ### 팀 정보 | Team Information
 | 이름 | 역할 | 이메일 | Github ID |
 |---|---|---|---|
@@ -75,15 +81,3 @@ $ yarn start or npm run start
 - 소스코드 관리 : `Github`
 - 회의 및 일정관리 : `Slack`
 - 문서, 회의 내용 기록 : `Notion`
-
-## 저작권 및 사용권 | License
- * [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
-
-This project is licensed under the terms of the MIT license.
-
-※ [라이선스 비교표(클릭)](https://olis.or.kr/license/compareGuide.do)
-
-※ [Github 내 라이선스 키워드(클릭)](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/licensing-a-repository)
-
-※ [\[참조\] Github license의 종류와 나에게 맞는 라이선스 선택하기(클릭)](https://flyingsquirrel.medium.com/github-license%EC%9D%98-%EC%A2%85%EB%A5%98%EC%99%80-%EB%82%98%EC%97%90%EA%B2%8C-%EB%A7%9E%EB%8A%94-%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4-%EC%84%A0%ED%83%9D%ED%95%98%EA%B8%B0-ae29925e8ff4)
-
