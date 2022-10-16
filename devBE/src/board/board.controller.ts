@@ -17,9 +17,9 @@ export class BoardController {
     return this.boardService.createBoard(createBoardDto, req.user);
   }
 
-  @Delete("/:idx")
-  deleteBoard(@Param("idx", ParseIntPipe) idx: number): Promise<void> {
-    return this.boardService.deleteBoard(idx);
+  @Delete("/deleteBoard/:idx")
+  deleteBoard(@Param("idx", ParseIntPipe) idx: number, @Req() req): Promise<void> {
+    return this.boardService.deleteBoard(idx, req.user);
   }
 
   @Patch("/updateBoard/:idx")
@@ -31,6 +31,11 @@ export class BoardController {
   @Get("/getAllBoards")
   getAllBoards(): Promise<Board[]> {
     return this.boardService.getAllBoards();
+  }
+
+  @Get("/getBoardsById")
+  getBoardsById(@Req() req): Promise<Board[]> {
+    return this.boardService.getBoardsbyId(req.user);
   }
 
 

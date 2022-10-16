@@ -4,10 +4,10 @@ import { RequestTypes } from "../entities/board.entity";
 
 export class CreateBoardDto {
     
-    @IsNotEmpty()
-    @IsString()
-    @ApiProperty({description: "identifier"})
-    identifier: string;
+    // @IsNotEmpty()
+    // @IsString()
+    // @ApiProperty({description: "identifier"})
+    // identifier: string;
 
     @IsNotEmpty()
     @IsEnum(RequestTypes)

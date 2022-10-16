@@ -18,13 +18,8 @@ export class BoardService {
     return this.boardRepository.createBoard(createBoardDto, user);
   }
 
-  async deleteBoard(idx: number): Promise<void> {
-    const result = await this.boardRepository.delete({ idx });
-
-    if (result.affected === 0) {
-      throw new NotFoundException(`Can't find board with index: ${idx}`);
-    }
-    console.log("result: ", result);
+  async deleteBoard(idx: number, user: User): Promise<void> {
+    this.boardRepository.deleteBoard(idx, user);
   }
 
   async updateBoard(idx: number, updateBoardDto: UpdateBoardDto): Promise<Board> {
@@ -41,6 +36,10 @@ export class BoardService {
 
   async getAllBoards(): Promise<Board[]> {
     return this.boardRepository.find();
+  }
+
+  async getBoardsbyId(user: User): Promise<Board[]> {
+    return this.boardRepository.getBoardsById(user);
   }
 
 

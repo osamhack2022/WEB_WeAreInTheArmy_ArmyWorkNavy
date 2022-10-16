@@ -14,11 +14,11 @@ export class Board extends BaseEntity {
     @PrimaryGeneratedColumn()
     @ApiProperty({ description: "[primary] index" })
     idx: number;
- 
-    @Column()
-    @ApiProperty({ description: "identifier" })
-    identifier: string;
-
+    
+    // @Column()
+    // @ApiProperty({ description: "identifier" })
+    // identifier: string;
+    
     @Column({
         type: "enum",
         enum: RequestTypes,
@@ -55,7 +55,7 @@ export class Board extends BaseEntity {
     @ApiProperty({ description: "updatedAt - auto created" })
     updatedAt: Date;
 
-    @JoinColumn({referencedColumnName: "identifier", name: "userId"})
+    @JoinColumn({referencedColumnName: "identifier", name: "identifier"})
     @ManyToOne(() => User, (user) => user.boards, { onDelete: "CASCADE", })
     user: User;
 }
