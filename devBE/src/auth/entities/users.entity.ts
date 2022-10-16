@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Board } from "src/board/entities/board.entity";
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export enum AccountTypes {
     ADMINISTRATOR = "administrator",
@@ -11,15 +12,15 @@ export enum AccountTypes {
 @Entity()
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
-    @ApiProperty({description: "[primary] index"})
+    @ApiProperty({ description: "[primary] index" })
     idx: number;
 
     @Column({ unique: true })
-    @ApiProperty({description: "[unique] identifier"})
+    @ApiProperty({ description: "[unique] identifier" })
     identifier: string;
 
     @Column()
-    @ApiProperty({description: "password"})
+    @ApiProperty({ description: "password" })
     password: string;
 
     @Column({
@@ -27,34 +28,37 @@ export class User extends BaseEntity {
         enum: AccountTypes,
         default: AccountTypes.DEFAULT,
     })
-    @ApiProperty({description: "account type: administrator, citizen, millitary"})
+    @ApiProperty({ description: "account type: administrator, citizen, millitary" })
     type: AccountTypes;
 
     @Column()
-    @ApiProperty({description: "user name"})
+    @ApiProperty({ description: "user name" })
     name: string;
 
     @Column()
-    @ApiProperty({description: "phone number"})
+    @ApiProperty({ description: "phone number" })
     phone: string;
 
     @Column({ nullable: true })
-    @ApiProperty({description: "[opt] organization"})
+    @ApiProperty({ description: "[opt] organization" })
     organization: string;
 
     @Column({ nullable: true })
-    @ApiProperty({description: "[opt] email"})
+    @ApiProperty({ description: "[opt] email" })
     email: string;
 
     @Column({ nullable: true })
-    @ApiProperty({description: "[opt] address"})
+    @ApiProperty({ description: "[opt] address" })
     address: string;
 
     @CreateDateColumn()
-    @ApiProperty({description: "createdAt - auto created"})
+    @ApiProperty({ description: "createdAt - auto created" })
     createdAt: Date;
 
     @UpdateDateColumn()
-    @ApiProperty({description: "updatedAt - auto created"})
+    @ApiProperty({ description: "updatedAt - auto created" })
     updatedAt: Date;
+
+    @OneToMany(() => Board, (board) => board.user, { cascade: true, eager: true})
+    boards: Board[];
 }

@@ -2,8 +2,7 @@ import { CustomRepository } from "src/database/typeorm-ex.decorator";
 import { Repository } from "typeorm";
 import { User } from './entities/users.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ConflictException, InternalServerErrorException, UnauthorizedException } from "@nestjs/common";
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { ConflictException, InternalServerErrorException } from "@nestjs/common";
 import * as bcrypt from "bcryptjs";
 
 @CustomRepository(User)
