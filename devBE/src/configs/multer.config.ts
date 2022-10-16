@@ -1,5 +1,5 @@
 import { NotAcceptableException } from "@nestjs/common";
-import { existsSync, mkdirSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { diskStorage } from "multer";
 import { extname, join } from "path";
 import {v4 as uuid} from "uuid"
@@ -16,11 +16,18 @@ export const multerConfigs = {
     storage: diskStorage({
         destination: (request, file, callback) => {
             const uploadPath = join(__dirname, "..", "..", "public", "reqImages");
-
+            
             if (!existsSync(uploadPath)) {
                 // Create uploadPath if not exists
                 mkdirSync(uploadPath, {recursive: true});
             }
+
+            const temporalImagePath = join(uploadPath, "temporalImage.json")
+            if (!existsSync(temporalImagePath)) {
+                // Create survivedImages list - json file
+                writeFileSync(temporalImagePath, JSON.stringify({temporalImage: []}));
+            }
+
             callback(null, uploadPath);
         },
 

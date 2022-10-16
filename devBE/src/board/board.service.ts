@@ -6,8 +6,9 @@ import { BoardRepository } from './board.repository';
 import { Board } from './entities/board.entity';
 import { User } from 'src/auth/entities/users.entity';
 import { createImageURL } from 'src/configs/multer.config';
-import { unlink } from 'fs';
-import { basename } from 'path';
+import { unlink,  } from 'fs';
+import { basename, join } from 'path';
+import { readFile, writeFile } from 'fs/promises';
 
 @Injectable()
 export class BoardService {
@@ -49,10 +50,10 @@ export class BoardService {
     const uploadedFiles: string[] = [];
 
     for (const file of files) {
-      uploadedFiles.push(createImageURL(file));
+      uploadedFiles.push(basename(createImageURL(file)));
     }
 
-    const unfixed = setTimeout(() => { this.autoRemoveImages(uploadedFiles) }, 3000);
+    const unfixed = setTimeout(() => { this.autoRemoveImages(uploadedFiles) }, 15000);
 
     // clearTimeout(unfixed);
 
@@ -68,17 +69,35 @@ export class BoardService {
   }
 
   async autoRemoveImages(uploadedFiles: string[]) {
-    for (const filePath of uploadedFiles) {
-      unlink(filePath, (err) => {
-        if (err) throw err;
-        console.log(`${basename(filePath)} was deleted`);
-      });
-    }
+    const temporalImagePath = join(__dirname, "..", "..", "public", "reqImages", "temporalImage.json");
+    readFile(temporalImagePath, 'utf-8')
+    .then((data) => {
+      const temporalImageList = JSON.parse(data);
+      for (const filePath of uploadedFiles) {
+        const idx = temporalImageList.temporalImage.indexOf(filePath);
+        if (idx > -1) {
+          temporalImageList.temporalImage.splice(idx, 1);
+          continue;
+        }
+        unlink(join(__dirname, "..", "..", "public", "reqImages", filePath), (err) => {
+          if (err) throw err;
+          console.log(`${basename(filePath)} was deleted`);
+        });
+      }
+      writeFile(temporalImagePath, JSON.stringify(temporalImageList))
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        throw err;
+      })
+    })
+    .catch((err) => {
+      throw err;
+    })
+
+    
   }
-
-  // fixImages() {
-
-  // }
 
 
   /*
