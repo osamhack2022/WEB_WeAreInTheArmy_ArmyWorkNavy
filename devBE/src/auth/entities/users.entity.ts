@@ -59,6 +59,6 @@ export class User extends BaseEntity {
     @ApiProperty({ description: "updatedAt - auto created" })
     updatedAt: Date;
 
-    @OneToMany(() => Board, (board) => board.user, { cascade: true, eager: true})
+    @OneToMany(() => Board, (board) => board.user, { cascade: true})
     boards: Board[];
 }

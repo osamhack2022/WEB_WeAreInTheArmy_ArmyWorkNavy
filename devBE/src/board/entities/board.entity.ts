@@ -56,6 +56,6 @@ export class Board extends BaseEntity {
     updatedAt: Date;
 
     @JoinColumn({referencedColumnName: "identifier", name: "identifier"})
-    @ManyToOne(() => User, (user) => user.boards, { onDelete: "CASCADE", })
+    @ManyToOne(() => User, (user) => user.boards, { onDelete: "CASCADE", lazy: true})
     user: User;
 }

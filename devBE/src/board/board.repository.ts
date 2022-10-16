@@ -19,10 +19,18 @@ export class BoardRepository extends Repository<Board> {
         return board;
     }
 
-    async updateBoard(idx: number, updateBoardDto: UpdateBoardDto): Promise<Board> {
+    async updateBoard(idx: number, updateBoardDto: UpdateBoardDto, user: User): Promise<Board> {
         const { type, title, description, location, admit, image } = updateBoardDto;
 
-        const board = await this.findOneBy({ idx });
+        const board = await this.findOne(
+            {
+                where: {
+                    idx,
+                    user: {
+                        identifier: user.identifier
+                    },
+                }
+            });
         board.type = type || board.type;
         board.title = title || board.title;
         board.description = description || board.description;

@@ -1,11 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UsePipes, ParseIntPipe, UseGuards, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
 
 @Controller('/api/board')
+@ApiTags("Boards API")
 @UseGuards(AuthGuard())
 export class BoardController {
   constructor(private readonly boardService: BoardService) {}
@@ -24,8 +26,12 @@ export class BoardController {
 
   @Patch("/updateBoard/:idx")
   @UsePipes(ValidationPipe)
-  updateBoard(@Param('idx', ParseIntPipe) idx: number, @Body() updateBoardDto: UpdateBoardDto): Promise<Board> {
-    return this.boardService.updateBoard(idx, updateBoardDto);
+  updateBoard(
+    @Param('idx', ParseIntPipe) idx: number,
+    @Body() updateBoardDto: UpdateBoardDto,
+    @Req() req
+    ): Promise<Board> {
+    return this.boardService.updateBoard(idx, updateBoardDto, req.user);
   }
 
   @Get("/getAllBoards")
@@ -33,13 +39,12 @@ export class BoardController {
     return this.boardService.getAllBoards();
   }
 
-  @Get("/getBoardsById")
+  @Get("/getBoardsByAuth")
   getBoardsById(@Req() req): Promise<Board[]> {
     return this.boardService.getBoardsbyId(req.user);
   }
 
-
-  @Get("/:idx")
+  @Get("/getBoardByIndex/:idx")
   getBoardByIdx(@Param("idx") idx: number): Promise<Board> {
     return this.boardService.getBoardByIdx(idx);
   }
