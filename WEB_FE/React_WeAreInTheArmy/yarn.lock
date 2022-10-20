@@ -2577,6 +2577,11 @@ v8-compile-cache@^2.0.3:
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
 
+vite-plugin-html-env@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/vite-plugin-html-env/-/vite-plugin-html-env-1.2.7.tgz#6354e12ed3e642d91c9e1168c0b3ffc18e69616b"
+  integrity sha512-vdTnKtuBeB8Zp93DCbN0Qjf4odW2msVRq45r7lGKA6nwQGJFj6YemU54u3xPPkvDeZhG8DEEU64xbLwzVEBilQ==
+
 vite-tsconfig-paths@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vite-tsconfig-paths/-/vite-tsconfig-paths-3.5.0.tgz#bfdf93f8072eff04125112ea9602fd50ae8cdad9"

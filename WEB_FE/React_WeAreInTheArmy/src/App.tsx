@@ -9,6 +9,7 @@ import StatusTemplate from './components/Templates/Status/StatusTemplate';
 import FlexContainer from './components/UI/FlexContantainer';
 import TemplateWrapper from './components/UI/TemplateWrapper';
 import ApplyContextProvider from './context/ApplyContext';
+import TestTemplate from './components/Templates/Test/TestTemplate';
 import { Url } from './data/url';
 import PostTemplate from './components/Templates/Post/PostTemplate';
 
@@ -49,6 +50,7 @@ function App() {
                   </ApplyContextProvider>
                 }
               />
+              <Route path="/test" element={<TestTemplate />} />
             </Routes>
           </TemplateWrapper>
         </FlexContainer>
