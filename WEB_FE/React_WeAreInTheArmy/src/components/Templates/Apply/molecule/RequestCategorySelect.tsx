@@ -1,6 +1,6 @@
 import Option from '../../../UI/Option';
 import Select from '../../../UI/Select';
-import DefaultInformation from '../atom/DefaultInformation';
+import DefaultInformation from '../../../UI/DefaultInformation';
 
 interface RequestCategorySelectProps {
   label: string;

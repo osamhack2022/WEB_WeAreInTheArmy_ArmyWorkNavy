@@ -1,6 +1,6 @@
-import FlexContainer from '../../../UI/FlexContantainer';
-import Text from '../../../UI/Text';
-import EssentialMark from './EssentialMark';
+import FlexContainer from './FlexContantainer';
+import Text from './Text';
+import EssentialMark from '../Templates/Apply/atom/EssentialMark';
 
 interface DefaultInformation {
   label: string;
