@@ -4,7 +4,7 @@ import '../../../../public/assets/imgs/MainPage/Main.png';
 import Button from '../../UI/Button';
 import FlexContainer from '../../UI/FlexContantainer';
 import Text from '../../UI/Text';
-import Map from './atom/Map';
+import HelpMap from './atom/HelpMap';
 import Actions from './molecule/Actions';
 
 export default function MainTemplate() {
@@ -29,7 +29,7 @@ export default function MainTemplate() {
           <Text size="text-base" className="mb-3">
             최대한 빨리 조치할 수 있도록 노력하겠습니다.
           </Text>
-          <Map />
+          <HelpMap />
           <Button
             size="lg"
             onClick={() => {

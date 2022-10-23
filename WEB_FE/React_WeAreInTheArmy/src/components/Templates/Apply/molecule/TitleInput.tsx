@@ -1,5 +1,5 @@
 import Input from '../../../UI/Input';
-import DefaultInformation from '../atom/DefaultInformation';
+import DefaultInformation from '../../../UI/DefaultInformation';
 
 interface TitleInputProps {
   label: string;

@@ -1,8 +1,8 @@
 export const URL = [
   { name: '메인', to: '/' },
   {
-    name: '사업소개',
-    to: '/introduce',
+    name: '참여하기',
+    to: '/participate',
     src: '../../public/assets/imgs/Header/idea.png',
   },
   {
@@ -25,8 +25,8 @@ export const URL = [
 export const Url = [
   { name: '메인', to: '/' },
   {
-    name: '사업소개',
-    to: '/introduce',
+    name: '참여하기',
+    to: '/participate',
   },
   {
     name: '신청현황',

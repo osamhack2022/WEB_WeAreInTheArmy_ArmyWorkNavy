@@ -1,5 +1,5 @@
 import TextArea from '../../../UI/TextArea';
-import DefaultInformation from '../atom/DefaultInformation';
+import DefaultInformation from '../../../UI/DefaultInformation';
 
 interface DescriptionAreaProps {
   label: string;
