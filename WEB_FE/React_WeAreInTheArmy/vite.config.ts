@@ -13,6 +13,5 @@ export default defineConfig({
       // compiler: false // old
     }),
   ],
-
   // base: '/absproxy/5173/',
 });
