@@ -20,7 +20,7 @@ export default function RequestCategorySelect({
 }: RequestCategorySelectProps) {
   return (
     <DefaultInformation label={label} isEssential>
-      <Select className="w-3/4">
+      <Select className="w-3/4" onChange={dispatch}>
         {options.map(({ label, value }: Options) => (
           <Option value={value}>{label}</Option>
         ))}

@@ -10,6 +10,7 @@ export default function Select({ children, ...props }: HasChild & SelectProps) {
       className={classNames(
         props.className,
         'px-3',
+        'h-[50px]',
         'py-1.5',
         'text-gray-700',
         'bg-white',

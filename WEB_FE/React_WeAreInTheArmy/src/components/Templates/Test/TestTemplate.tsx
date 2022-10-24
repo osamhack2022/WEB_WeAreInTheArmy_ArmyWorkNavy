@@ -1,18 +1,37 @@
+import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import Button from 'src/components/UI/Button';
 import Paper from 'src/components/UI/Paper';
+import { client } from 'src/util/client';
 
 export default function TestTemplate() {
   return (
     <div className="w-[900px]">
-      hello
-      <Map
-        center={{ lat: 33.5563, lng: 126.79581 }}
-        style={{ width: '100%', height: '360px' }}
+      <Button
+        onClick={() => {
+          client
+            .post('/api/auth/signup', {
+              identifier: 'string tester',
+              password: 'string',
+              type: 'administrator',
+              name: 'string',
+              phone: 'string',
+              organization: 'string',
+              email: 'string@asd.com',
+              address: 'string',
+            })
+            .then((res) => console.log(res));
+        }}
       >
-        <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
-          <div style={{ color: '#000' }}>Hello World!</div>
-        </MapMarker>
-      </Map>
+        test1
+      </Button>
+      <Button
+        onClick={() => {
+          client.get('/', {}).then((res) => console.log(res));
+        }}
+      >
+        test2
+      </Button>
     </div>
   );
 }
