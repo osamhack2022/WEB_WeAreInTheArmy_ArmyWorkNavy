@@ -1,8 +1,17 @@
 import HLText from 'src/components/UI/HLText';
 import Text from 'src/components/UI/Text';
+import { RequestTypes } from 'src/type';
 import CombiInfo from '../atom/CombiInfo';
 
-export default function DetailInfo() {
+export default function DetailInfo({
+  title,
+  type,
+  description,
+}: {
+  title: string;
+  type: RequestTypes;
+  description: string;
+}) {
   return (
     <div className="p-4">
       <Text size="text-2xl" className="font-bold mb-4">

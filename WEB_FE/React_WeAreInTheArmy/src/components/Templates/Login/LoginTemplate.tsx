@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { client } from 'src/util/client';
 import Button from '../../UI/Button';
 import FlexContainer from '../../UI/FlexContantainer';
 import Input from '../../UI/Input';
@@ -7,9 +8,15 @@ import Paper from '../../UI/Paper';
 import Text from '../../UI/Text';
 
 export default function LoginTemplate() {
-  const [id, setId] = useState<string>('');
-  const handleChangeId = (newId: string) => {
-    setId(newId);
+  const signin = () => {
+    client.post('/api/auth/signip', {
+      identifier,
+      password,
+    });
+  };
+  const [identifier, setIdentifier] = useState<string>('');
+  const handleChangeIdentifier = (newIdentifier: string) => {
+    setIdentifier(newIdentifier);
   };
   const [password, setPassword] = useState<string>('');
   const handleChangePassword = (newPassword: string) => {
@@ -31,12 +38,12 @@ export default function LoginTemplate() {
               아이디
             </Text>
             <Input
-              value={id}
+              value={identifier}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                handleChangeId(event.target.value)
+                handleChangeIdentifier(event.target.value)
               }
               type="text"
-              placeholder="ID"
+              placeholder="identifier"
               className="w-[300px] h-[50px] "
             />
           </FlexContainer>
