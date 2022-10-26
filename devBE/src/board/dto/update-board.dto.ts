@@ -35,4 +35,9 @@ export class UpdateBoardDto extends PartialType(CreateBoardDto) {
     @ApiProperty({description: "[opt] image of the place"})
     image: string;
 
+    @IsOptional()
+    @IsString()
+    @ApiProperty({description: "[opt] who accepted the request"})
+    acceptedBy: string;
+
 }

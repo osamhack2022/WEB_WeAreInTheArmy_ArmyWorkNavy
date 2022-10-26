@@ -27,7 +27,7 @@ import { Board } from './entities/board.entity';
 @ApiTags('Boards API')
 @UseGuards(AuthGuard())
 export class BoardController {
-	constructor(private readonly boardService: BoardService) {}
+	constructor(private readonly boardService: BoardService) { }
 
 	@Post('/createBoard')
 	@UsePipes(ValidationPipe)
@@ -68,7 +68,17 @@ export class BoardController {
 
 	@Get('/getBoardByIndex/:idx')
 	getBoardByIdx(@Param('idx') idx: number): Promise<Board> {
-		return this.boardService.getBoardByIdx(idx);  
+		return this.boardService.getBoardByIdx(idx);
+	}
+
+	@Get('/getAcceptedBoards')
+	getAcceptedBoard(@Req() req): Promise<Board[]> {
+		return this.boardService.getAcceptedBoards(req.user);
+	}
+
+	@Get('/getBoardsByAcceptor/:identifier')
+	getBoardBy(@Param('identifier') identifier: string): Promise<Board[]> {
+		return this.boardService.getBoardsByAcceptor(identifier);
 	}
 
 	@Post('/uploadImages')
@@ -78,30 +88,48 @@ export class BoardController {
 		return this.boardService.uploadImages(files);
 	}
 
+	@Patch('/acceptRequest/:idx')
+	@UsePipes(ValidationPipe)
+	acceptRequest(
+		@Param('idx', ParseIntPipe) idx: number,
+		@Req() req,
+	): Promise<Board> {
+		return this.boardService.acceptRequest(idx, req.user);
+	}
+
+	@Patch('/cancelRequest/:idx')
+	@UsePipes(ValidationPipe)
+	cancelRequest(
+		@Param('idx', ParseIntPipe) idx: number,
+		@Req() req,
+	): Promise<Board> {
+		return this.boardService.cancelRequest(idx, req.user);
+	}
+
 	/*
   @Post()
   create(@Body() createBoardDto: CreateBoardDto) {
-    return this.boardService.create(createBoardDto);
+	return this.boardService.create(createBoardDto);
   }
 
   @Get()
   findAll() {
-    return this.boardService.findAll();
+	return this.boardService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.boardService.findOne(+id);
+	return this.boardService.findOne(+id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBoardDto: UpdateBoardDto) {
-    return this.boardService.update(+id, updateBoardDto);
+	return this.boardService.update(+id, updateBoardDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.boardService.remove(+id);
+	return this.boardService.remove(+id);
   }
   */
 }
