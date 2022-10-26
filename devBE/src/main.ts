@@ -8,7 +8,7 @@ async function bootstrap() {
 		origin: true,
 		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
 		allowedHeaders:
-			'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
+			'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe, Access-Control-Allow-Headers',
 		credentials: true,
 	});
 	setUpSwagger(app);
