@@ -7,7 +7,11 @@ type DefaultInfomationState = {
   location?: string;
 };
 
-export type RequestCategory = '재난구조' | '환호보호' | '교육/의료/문화';
+export type RequestCategory =
+  | 'environmental'
+  | 'disastor'
+  | 'social'
+  | 'default';
 
 type ApplyDataState = {
   title: string;
@@ -118,7 +122,7 @@ export function DefaultInformationProvider({
 export function ApplyDataProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(ApplyDataReducer, {
     title: '',
-    requestCategory: '재난구조',
+    requestCategory: 'default',
     description: '',
   });
 
@@ -149,7 +153,7 @@ export function useApplyDataState() {
   return state;
 }
 
-export function useeApplyDataDispatch() {
+export function useApplyDataDispatch() {
   const dispatch = useContext(ApplyDataDispatchContext);
   if (!dispatch) throw new Error('Cannot find ApplyDataProvider'); // 유효하지 않을땐 에러를 발생
   return dispatch;

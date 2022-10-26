@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Divider from 'src/components/UI/Divider';
 import FlexContainer from 'src/components/UI/FlexContantainer';
 import Paper from 'src/components/UI/Paper';
 import SemiHeader from 'src/components/UI/SemiHeader';
 import { Accept, Post } from 'src/type';
+import { client } from 'src/util/client';
 import StatusBody from './molecule/StatusBody';
 import StatusHead from './molecule/StatusHead';
 
 export default function StatusTemplate() {
   const [post, setPost] = useState<Post[]>([]);
+  useEffect(() => {
+    client.get('/api/board/getAllBoards').then((res) => setPost(res.data));
+  }, []);
   return (
     <Paper className="w-[900px]">
       <SemiHeader
