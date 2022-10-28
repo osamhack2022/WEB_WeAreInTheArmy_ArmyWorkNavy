@@ -7,6 +7,8 @@ import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
+import { UnitJoinDto } from './dto/unit-join.dto';
+import { SoldierJoinDto } from './dto/soldier-join.dto';
 
 @Controller('/api/board')
 @ApiTags("Boards API")
@@ -58,6 +60,18 @@ export class BoardController {
     @UploadedFiles() files: File[]
   ): object {
     return this.boardService.uploadImages(files);
+  }
+
+  @Patch("/unitParticipate")
+  @UsePipes(ValidationPipe)
+  unitParticipate(@Body() unitJoinDto: UnitJoinDto, @Req() req): Promise<Board> {
+    return this.boardService.unitParticipate(unitJoinDto, req.user);
+  }
+
+  @Patch("/soldierParticipate")
+  @UsePipes(ValidationPipe)
+  soldierParticipate(@Body() soldierJoinDto: SoldierJoinDto, @Req() req): Promise<Board> {
+    return this.boardService.soldierParticipate(soldierJoinDto, req.user);
   }
 
 

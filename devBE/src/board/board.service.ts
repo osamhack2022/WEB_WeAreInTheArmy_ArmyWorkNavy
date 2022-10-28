@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UploadedFiles } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
@@ -9,6 +9,8 @@ import { createImageURL } from 'src/configs/multer.config';
 import { unlink,  } from 'fs';
 import { basename, join } from 'path';
 import { readFile, writeFile } from 'fs/promises';
+import { UnitJoinDto } from './dto/unit-join.dto';
+import { SoldierJoinDto } from './dto/soldier-join.dto';
 
 @Injectable()
 export class BoardService {
@@ -95,8 +97,14 @@ export class BoardService {
     .catch((err) => {
       throw err;
     })
+  }
 
-    
+  async unitParticipate(unitJoinDto: UnitJoinDto, user: User): Promise<Board> {
+    return this.boardRepository.unitParticipate(unitJoinDto, user);
+  }
+
+  async soldierParticipate(soldierJoinDto: SoldierJoinDto, user: User): Promise<Board> {
+    return this.boardRepository.soldierParticipate(soldierJoinDto, user);
   }
 
 

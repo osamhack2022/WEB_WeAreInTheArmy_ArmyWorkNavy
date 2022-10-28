@@ -47,6 +47,10 @@ export class Board extends BaseEntity {
     @ApiProperty({ description: "image of the place" })
     image: string;
 
+    @Column({ type: "longtext", nullable: true })
+    @ApiProperty({ description: "json data of admin/soldier on the request" })
+    participants: string;
+
     @CreateDateColumn()
     @ApiProperty({ description: "createdAt - auto created" })
     createdAt: Date;

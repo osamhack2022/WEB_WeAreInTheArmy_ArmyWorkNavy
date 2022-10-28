@@ -1,10 +1,13 @@
-import { User } from "src/auth/entities/users.entity";
+import { AccountTypes, User } from "src/auth/entities/users.entity";
 import { CustomRepository } from "src/database/typeorm-ex.decorator";
 import { Repository } from "typeorm";
 import { CreateBoardDto } from "./dto/create-board.dto";
 import { UpdateBoardDto } from "./dto/update-board.dto";
 import { Board } from "./entities/board.entity";
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { UnitJoinDto } from './dto/unit-join.dto';
+import { SoldierJoinDto } from './dto/soldier-join.dto';
+import { NotAcceptableException } from '@nestjs/common';
 
 @CustomRepository(Board)
 export class BoardRepository extends Repository<Board> {
@@ -62,6 +65,86 @@ export class BoardRepository extends Repository<Board> {
             console.log("result:", result);
         } catch {
             throw new NotFoundException(`Can't find board with idx: ${idx}`);
+        }
+    }
+
+    async unitParticipate(unitJoinDto: UnitJoinDto, user: User): Promise<Board> {
+        if (user.type !== AccountTypes.ADMINISTRATOR) {
+            throw new UnauthorizedException(`Only administrator allowed, your account type: ${user.type}`);
+        }
+
+        const { board_idx, unit, password } = unitJoinDto;
+        try {
+            const board = await this.findOneBy({ idx: board_idx });
+            let participants;
+            if (!board.participants) {
+                participants = {
+                    units: {},
+                    soldiers: {},
+                }
+            } else {
+                participants = JSON.parse(board.participants);
+            }
+
+            participants.units[user.identifier] = {
+                unit,
+                password,
+            }
+
+            board.participants = JSON.stringify(participants);
+
+            await this.save(board);
+            return board;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async soldierParticipate(soldierJoinDto: SoldierJoinDto, user: User): Promise<Board> {
+        if (user.type !== AccountTypes.MILLITARY) {
+            throw new UnauthorizedException(`Only MILLITARY user allowed, your account type: ${user.type}`);
+        }
+
+        const { board_idx, name, unit, serial_number, password } = soldierJoinDto;
+
+        try {
+            const board = await this.findOneBy({ idx: board_idx });
+            let participants;
+            if (!board.participants) {
+                participants = {
+                    units: {},
+                    soldiers: {},
+                }
+                throw new NotAcceptableException(`Your unit didn't joined this request yet.`)
+            }
+
+            participants = JSON.parse(board.participants);
+
+
+            let found = {};
+            for (const prop in participants.units) {
+                const unitObject = participants.units[prop]
+                if (unitObject.unit === unit && unitObject.password === password) {
+                    found = unitObject;
+                }
+            }
+
+            if (Object.keys(found).length===0) {
+                throw new NotAcceptableException(`Your unit didn't joined this request yet.`);
+            }
+
+            participants.soldiers[user.identifier] = {
+                name,
+                unit,
+                serial_number
+            }
+
+            board.participants = JSON.stringify(participants);
+            await this.save(board);
+            return board;
+
+        } catch (err) {
+            throw err;
         }
     }
 }
