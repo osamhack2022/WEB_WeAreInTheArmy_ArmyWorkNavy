@@ -11,6 +11,7 @@ import { basename, join } from 'path';
 import { readFile, writeFile } from 'fs/promises';
 import { UnitJoinDto } from './dto/unit-join.dto';
 import { SoldierJoinDto } from './dto/soldier-join.dto';
+import { SetStatusDto } from './dto/set-status.dto';
 
 @Injectable()
 export class BoardService {
@@ -44,8 +45,8 @@ export class BoardService {
     return this.boardRepository.find();
   }
 
-  async getBoardsbyId(user: User): Promise<Board[]> {
-    return this.boardRepository.getBoardsById(user);
+  async getBoardsbyIdentifier(identifier: string): Promise<Board[]> {
+    return this.boardRepository.getBoardsByIdentifier(identifier);
   }
 
   uploadImages(files: File[]): object {
@@ -113,6 +114,14 @@ export class BoardService {
 
   async soldierCancelParticipation(idx: number, user: User): Promise<Board> {
     return this.boardRepository.soldierCancelParticipation(idx, user);
+  }
+
+  async setStatus(setStatusDto: SetStatusDto, user:User): Promise<Board> {
+    return this.boardRepository.setStatus(setStatusDto, user);
+  }
+
+  async setDone(idx:number, user:User): Promise<Board> {
+    return this.boardRepository.setDone(idx, user);
   }
 
 

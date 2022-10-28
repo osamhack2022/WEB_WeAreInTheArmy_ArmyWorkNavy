@@ -3,11 +3,12 @@ import { CustomRepository } from "src/database/typeorm-ex.decorator";
 import { Repository } from "typeorm";
 import { CreateBoardDto } from "./dto/create-board.dto";
 import { UpdateBoardDto } from "./dto/update-board.dto";
-import { Board } from "./entities/board.entity";
+import { AcceptanceStatus, Board } from "./entities/board.entity";
 import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UnitJoinDto } from './dto/unit-join.dto';
 import { SoldierJoinDto } from './dto/soldier-join.dto';
 import { NotAcceptableException } from '@nestjs/common';
+import { SetStatusDto } from './dto/set-status.dto';
 
 @CustomRepository(Board)
 export class BoardRepository extends Repository<Board> {
@@ -16,14 +17,14 @@ export class BoardRepository extends Repository<Board> {
         const { type, title, description, location, admit, image } = createBoardDto;
 
         const board = this.create({
-            type, title, description, location, admit, image, user
+            identifier: user.identifier, type, title, description, location, admit, image, status: AcceptanceStatus.PENDING, done: false, user
         });
         await this.save(board);
         return board;
     }
 
     async updateBoard(idx: number, updateBoardDto: UpdateBoardDto, user: User): Promise<Board> {
-        const { type, title, description, location, admit, image } = updateBoardDto;
+        const { type, title, description, location, admit, image, status, done, participants } = updateBoardDto;
 
         const board = await this.findOne(
             {
@@ -40,17 +41,21 @@ export class BoardRepository extends Repository<Board> {
         board.location = location || board.location;
         board.admit = admit || board.admit;
         board.image = image || board.image;
+        board.status = status || board.status;
+        board.done = done || board.done;
+        board.participants = JSON.stringify(participants) || board.participants;
 
         await this.save(board);
         return board;
     }
 
-    async getBoardsById(user: User): Promise<Board[]> {
+    async getBoardsByIdentifier(identifier: string): Promise<Board[]> {
         const query = this.createQueryBuilder("board");
 
-        query.where("board.identifier = :identifier", { identifier: user.identifier })
+        query.where("board.identifier = :identifier", { identifier: identifier })
 
         const boards = await query.getMany();
+
         return boards;
     }
 
@@ -183,6 +188,35 @@ export class BoardRepository extends Repository<Board> {
             throw err;
         }
 
+    }
+
+    async setStatus(setStatusDto: SetStatusDto, user:User): Promise<Board> {
+        const {board_idx, status} = setStatusDto;
+        try {
+            if (user.type!=="administrator" ) {
+                throw new UnauthorizedException(`Only ADMINISTRATOR user allowed, your account type: ${user.type}`);
+            }
+            const board = await this.findOneBy({idx: board_idx});
+            board.status = status;
+            await this.save(board);
+            return board;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async setDone(idx: number, user: User): Promise<Board> {
+        try {
+            const board = await this.findOneBy({idx});
+            if (board.identifier !== user.identifier) {
+                throw new UnauthorizedException(`Only post writer can check done, writer: ${board.identifier}`);
+            }
+            board.done = true;
+            await this.save(board);
+            return board;
+        } catch (err) {
+            throw err;
+        }
     }
 
 }

@@ -16,6 +16,7 @@ import { UpdateAuthDto } from './dto/update-user.dto';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { User } from './entities/users.entity';
 
 @Controller('api/auth/')
 @ApiTags('Users and Authentication API')
@@ -24,7 +25,7 @@ export class AuthController {
 
 	@Post('/signup')
 	@ApiOperation({ summary: 'createUser API' })
-	signUp(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<void> {
+	signUp(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<CreateUserDto> {
 		return this.authService.signUp(createUserDto);
 	}
 
@@ -32,20 +33,21 @@ export class AuthController {
 	@ApiOperation({ summary: 'authenticateCredentials API' })
 	signIn(
 		@Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-	): Promise<{ accessToken: string }> {
+	): Promise<{ user:User, accessToken: string }> {
 		return this.authService.signIn(authCredentialsDto);
 	}
 
-	@Post('/test')
-	@UseGuards(AuthGuard())
-	@ApiOperation({ summary: 'get user object from authenticated client API' })
-	test(@Req() req) {
-		console.log('req', req.user);
+	@Get('/getUserInfo/:identifier')
+	@ApiOperation({ summary: 'get user object from identifier' })
+	getUserInfo(@Param("identifier") identifier:string): Promise<User> {
+		return this.authService.getUserInfo(identifier);
 	}
 
-	@Get('/hello')
-	hello() {
-		return 'hello'
+	@Get('/getUserInfoByAuth')
+	@UseGuards(AuthGuard())
+	@ApiOperation({ summary: 'get user object from authenticated client API' })
+	getUserInfoByAuth(@Req() req): Promise<User> {
+		return req.user;
 	}
 
 	/*
