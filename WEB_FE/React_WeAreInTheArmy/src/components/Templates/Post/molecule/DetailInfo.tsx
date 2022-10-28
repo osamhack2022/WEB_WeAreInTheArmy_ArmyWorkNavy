@@ -18,13 +18,13 @@ export default function DetailInfo({
         2. 신청내용
       </Text>
       <CombiInfo label="제목" isEssential>
-        <HLText>군대지</HLText>
+        <HLText>{title}</HLText>
       </CombiInfo>
       <CombiInfo label="요청 종류" isEssential>
-        <HLText>군대지</HLText>
+        <HLText>{type}</HLText>
       </CombiInfo>
       <CombiInfo label="문의내용" isEssential>
-        <HLText>군대지</HLText>
+        <HLText>{description}</HLText>
       </CombiInfo>
     </div>
   );

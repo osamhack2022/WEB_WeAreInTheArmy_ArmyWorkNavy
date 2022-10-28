@@ -12,19 +12,37 @@ import AgreePersonData from './organism/AgreePersonData';
 import ApplyDataForm from './organism/ApplyDataForm';
 import DefaultInformationForm from './organism/DefaultInformationForm';
 
+// {
+//   "type": "string",
+//   "title": "string",
+//   "description": "string",
+//   "location": "string",
+//   "admit": true,
+//   "image": "string"
+// }
+
 export default function ApplyTemplate() {
   const defaultInformationState = useDefaultInformationState();
   const applyDataState = useApplyDataState();
   console.log(defaultInformationState, applyDataState);
   const createBoard = () => {
-    client.post('/api/board/createBoard', {
-      type: applyDataState.requestCategory,
-      title: applyDataState.title,
-      description: applyDataState.description,
-      location: defaultInformationState.location,
-      admit: true,
-      image: 'string',
-    });
+    console.log(client.defaults);
+    client.post(
+      '/absproxy/3000/api/board/createBoard',
+      {
+        type: applyDataState.requestCategory,
+        title: applyDataState.title,
+        description: applyDataState.description,
+        location: defaultInformationState.location,
+        admit: true,
+        image: 'string',
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
+        },
+      },
+    );
   };
   const navigate = useNavigate();
   return (

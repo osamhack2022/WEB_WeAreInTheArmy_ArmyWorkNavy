@@ -5,9 +5,15 @@ export type HasChild = {
 };
 
 export type Post = {
-  id: number;
-  accept: Accept;
+  admit: boolean;
+  createdAt: string;
+  description: string;
+  idx: number;
+  image: string;
+  location: string;
   title: string;
+  type: string;
+  updatedAt: string;
 };
 
 export enum Accept {
@@ -76,4 +82,12 @@ export type Board = {
   updatedAt: Date;
 
   user: User;
+};
+
+export type Marker = {
+  position: {
+    lat: number;
+    lng: number;
+  };
+  content: string;
 };

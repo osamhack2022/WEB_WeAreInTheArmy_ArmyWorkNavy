@@ -1,6 +1,9 @@
+import { Modal } from 'flowbite-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { DangerToast } from 'src/components/UI/Toast';
 import { client } from 'src/util/client';
+import { setAuthroizationToken } from 'src/util/utils';
 import Button from '../../UI/Button';
 import FlexContainer from '../../UI/FlexContantainer';
 import Input from '../../UI/Input';
@@ -8,11 +11,27 @@ import Paper from '../../UI/Paper';
 import Text from '../../UI/Text';
 
 export default function LoginTemplate() {
-  const signin = () => {
-    client.post('/api/auth/signip', {
-      identifier,
-      password,
-    });
+  const navigate = useNavigate();
+  const signin = async () => {
+    try {
+      await client
+        .post('/absproxy/3000/api/auth/signin', {
+          identifier,
+          password,
+        })
+        .then((res) => {
+          const token = res.data.accessToken;
+          localStorage.setItem('jwtToken', token);
+          setAuthroizationToken(token);
+        });
+    } catch (e) {
+      console.log('error!', e);
+    }
+    if (localStorage.getItem('jwtToken') === null) {
+      setOpen(true);
+    } else {
+      navigate('/');
+    }
   };
   const [identifier, setIdentifier] = useState<string>('');
   const handleChangeIdentifier = (newIdentifier: string) => {
@@ -22,6 +41,8 @@ export default function LoginTemplate() {
   const handleChangePassword = (newPassword: string) => {
     setPassword(newPassword);
   };
+
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <FlexContainer className="mt-[50px]">
@@ -63,8 +84,8 @@ export default function LoginTemplate() {
           </FlexContainer>
         </FlexContainer>
         <FlexContainer className="flex-col justify-center ">
-          <Button size="base" className="mb-3">
-            로그인하기
+          <Button size="base" className="mb-3" onClick={signin}>
+            로그인
           </Button>
           <Text size="text-sm" className="text-slate-400">
             아이디가 없으신가요?
@@ -74,6 +95,14 @@ export default function LoginTemplate() {
           </Text>
         </FlexContainer>
       </Paper>
+      <Modal show={open} size="md" popup={open} onClose={() => setOpen(false)}>
+        <Modal.Header />
+        <Modal.Body>
+          <FlexContainer className="flex-col w-full h-full items-center">
+            <DangerToast message="로그인에 실패했습니다." />
+          </FlexContainer>
+        </Modal.Body>
+      </Modal>
     </FlexContainer>
   );
 }
