@@ -1,12 +1,13 @@
 import Text from 'src/components/UI/Text';
+import { isoStringToYYYYMMDD } from 'src/util/utils';
 import HLText from '../../../UI/HLText';
 import CombiInfo from '../atom/CombiInfo';
 
 export default function DefaultInfo({
-  name,
+  createdAt,
   location,
 }: {
-  name: string;
+  createdAt: string;
   location: string;
 }) {
   return (
@@ -14,14 +15,8 @@ export default function DefaultInfo({
       <Text size="text-2xl" className="font-bold mb-4">
         1. 기본 정보
       </Text>
-      <CombiInfo label="이름" isEssential>
-        <HLText>{name}</HLText>
-      </CombiInfo>
-      <CombiInfo label="기업/기관">
-        <HLText>군대지</HLText>
-      </CombiInfo>
-      <CombiInfo label="전화번호" isEssential>
-        <HLText>군대지</HLText>
+      <CombiInfo label="등록일자" isEssential>
+        <HLText>{isoStringToYYYYMMDD(createdAt)}</HLText>
       </CombiInfo>
       <CombiInfo label="장소">
         <HLText>{location}</HLText>

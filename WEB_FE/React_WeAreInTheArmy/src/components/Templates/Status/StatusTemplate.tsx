@@ -10,8 +10,11 @@ import StatusHead from './molecule/StatusHead';
 
 export default function StatusTemplate() {
   const [post, setPost] = useState<Post[]>([]);
+  console.log(post);
   useEffect(() => {
-    client.get('/api/board/getAllBoards').then((res) => setPost(res.data));
+    client
+      .get('/absproxy/3000/api/board/getAllBoards')
+      .then((res) => setPost(res.data));
   }, []);
   return (
     <Paper className="w-[900px]">
@@ -24,9 +27,7 @@ export default function StatusTemplate() {
         <div className="mb-3">{post.length}개의 게시물이 있습니다.</div>
         <table>
           <StatusHead />
-          <StatusBody
-            post={[{ id: 1, accept: Accept.Accept, title: '안녕' }]}
-          />
+          <StatusBody post={post} />
         </table>
       </FlexContainer>
     </Paper>

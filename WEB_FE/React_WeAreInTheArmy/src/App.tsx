@@ -12,6 +12,8 @@ import TestTemplate from './components/Templates/Test/TestTemplate';
 import { Url } from './data/url';
 import PostTemplate from './components/Templates/Post/PostTemplate';
 import ParticipateTemplate from './components/Templates/Participate/ParticipateTemplate';
+import { useEffect } from 'react';
+import { client } from './util/client';
 
 function App() {
   const location = useLocation();
@@ -37,9 +39,9 @@ function App() {
           </Routes>
           <TemplateWrapper>
             <Routes>
-              <Route path="/login" element={<LoginTemplate />} />
+              <Route path="absproxy/5173/login" element={<LoginTemplate />} />
               <Route path="/status" element={<StatusTemplate />} />
-              <Route path="/status/:id" element={<PostTemplate />} />
+              {<Route path="/status/:id" element={<PostTemplate />} />}
               <Route path="/signup" element={<SignupTemplate />} />
               <Route path="/participate" element={<ParticipateTemplate />} />
               <Route

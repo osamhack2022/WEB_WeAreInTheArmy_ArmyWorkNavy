@@ -1,16 +1,80 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import FlexContainer from '../../../UI/FlexContantainer';
+import { Map, CustomOverlayMap, MapMarker } from 'react-kakao-maps-sdk';
+import { useEffect, useReducer, useState } from 'react';
+import { Post } from 'src/type';
+import { useForceUpdate } from 'src/hooks/useForcedUpdate';
 
-const HelpMap = () => {
+const HelpMap = ({ posts }: { posts: Post[] }) => {
+  const [markers, setMarkers] = useState<
+    {
+      position: {
+        lat: number;
+        lng: number;
+      };
+      content: string;
+    }[]
+  >([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  console.log(posts);
+  useEffect(() => {
+    const ps = new kakao.maps.services.Places();
+    posts.forEach((v: Post) => {
+      let marker: {
+        position: {
+          lat: number;
+          lng: number;
+        };
+        content: string;
+      };
+      // 여기서 비동기 작업함.
+      // 근데 렌더링 이후에 데이터를 받아오고, 렌더링이 되면 함수가 데이터를 다 받아왔는데, 그 이후론 렌더링 여부를 정할 수 없음.
+      // 왜냐면 데이터를 받아왔는지, 안받았는지 체크가 안돼서,,
+      ps.keywordSearch(v.location, (data, status, _pagination) => {
+        if (status === kakao.maps.services.Status.OK) {
+          marker = {
+            position: {
+              lat: parseFloat(data[0].y),
+              lng: parseFloat(data[0].x),
+            },
+            content: data[0].place_name,
+          };
+          console.log(marker);
+          setMarkers((prev) => [...prev, marker]);
+        }
+      });
+    });
+  }, []);
+  console.log(markers);
   return (
     <div className="p-5 h-full mb-3 w-[800px]">
-      <Map
-        center={{ lat: 33.5563, lng: 126.79581 }}
-        style={{ width: '100%', height: '360px' }}
-      >
-        <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}>
-          <div style={{ color: '#000' }}>도움이 필요해요</div>
-        </MapMarker>
-      </Map>
+      {loading === false ? (
+        <div>로딩 중..</div>
+      ) : (
+        <Map // 지도를 표시할 Container
+          center={{
+            // 지도의 중심좌표
+            lat: 36.406931141203636,
+            lng: 127.2786853136011,
+          }}
+          style={{
+            // 지도의 크기
+            width: '100%',
+            height: '450px',
+          }}
+          level={14} // 지도의 확대 레벨
+        >
+          {markers.map((marker, index) => (
+            <CustomOverlayMap
+              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}-${index}`}
+              position={marker.position}
+            >
+              <FlexContainer className="label rounded-full bg-slate-300 w-16 h-16 flex-col justify-center items-center opacity-90">
+                <span className="z-10">{marker.content}</span>
+              </FlexContainer>
+            </CustomOverlayMap>
+          ))}
+        </Map>
+      )}
     </div>
   );
 };

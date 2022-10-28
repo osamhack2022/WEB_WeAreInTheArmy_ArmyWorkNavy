@@ -7,11 +7,19 @@ async function bootstrap() {
 	app.enableCors({
 		origin: true,
 		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-		allowedHeaders:
-			'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe, Access-Control-Allow-Headers',
 		credentials: true,
 	});
 	setUpSwagger(app);
 	await app.listen(3000);
 }
 bootstrap();
+
+// allowedHeaders: [
+// 	'X-Requested-With',
+// 	'Access-Control-Allow-Headers',
+// 	'Origin',
+// 	'Accept',
+// 	'Content-Type',
+// 	'Access-Control-Request-Method',
+// 	'Access-Control-Request-Headers',
+// ],

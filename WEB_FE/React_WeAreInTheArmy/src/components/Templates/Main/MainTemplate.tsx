@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { client } from 'src/util/client';
 import '../../../../public/assets/imgs/MainPage/Main.png';
 import Button from '../../UI/Button';
 import FlexContainer from '../../UI/FlexContantainer';
@@ -9,7 +10,15 @@ import Actions from './molecule/Actions';
 
 export default function MainTemplate() {
   const [count, setCount] = useState<number>(0);
+  const [posts, setPosts] = useState<any[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    client.get('/absproxy/3000/api/board/getAllBoards').then((res) => {
+      setPosts(res.data);
+      setCount(res.data.length);
+    });
+  }, []);
   return (
     <div className="w-full h-full">
       <FlexContainer className="flex-col">
@@ -29,7 +38,7 @@ export default function MainTemplate() {
           <Text size="text-base" className="mb-3">
             최대한 빨리 조치할 수 있도록 노력하겠습니다.
           </Text>
-          <HelpMap />
+          {posts.length > 0 && <HelpMap posts={posts} />}
           <Button
             size="lg"
             onClick={() => {

@@ -4,7 +4,7 @@ import Text from '../../../UI/Text';
 
 export default function AgreePersonData() {
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-[835px]">
       <Text size="text-3xl" className="font-bold p-4">
         3. 개인정보 수집 및 동의
       </Text>
