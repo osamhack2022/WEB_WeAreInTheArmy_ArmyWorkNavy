@@ -68,11 +68,25 @@ export class BoardController {
     return this.boardService.unitParticipate(unitJoinDto, req.user);
   }
 
+  @Patch("/unitCancelParticipation/:idx")
+  @UsePipes(ValidationPipe)
+  unitCancelParticipation(@Param("idx") idx:number, @Req() req): Promise<Board> {
+    return this.boardService.unitCancelParticipation(idx, req.user);
+  }
+
   @Patch("/soldierParticipate")
   @UsePipes(ValidationPipe)
   soldierParticipate(@Body() soldierJoinDto: SoldierJoinDto, @Req() req): Promise<Board> {
     return this.boardService.soldierParticipate(soldierJoinDto, req.user);
   }
+
+  @Patch("/soldierCancelParticipation/:idx")
+  @UsePipes(ValidationPipe)
+  soldierCancelParticipation(@Param("idx") idx:number, @Req() req): Promise<Board> {
+    return this.boardService.soldierCancelParticipation(idx, req.user);
+  }
+
+  
 
 
   /*

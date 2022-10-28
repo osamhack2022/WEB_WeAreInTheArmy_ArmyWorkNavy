@@ -100,6 +100,28 @@ export class BoardRepository extends Repository<Board> {
         }
     }
 
+    async unitCancelParticipation(idx:number, user:User): Promise<Board> {
+        try {
+            const board = await this.findOneBy({idx});
+            const participants = JSON.parse(board.participants);
+            const participationInfo = participants.units[user.identifier];
+            delete participants.units[user.identifier];
+            for (const prop in participants.soldiers) {
+                const soldierObject = participants.soldiers[prop];
+                if (soldierObject.unit === participationInfo.unit) {
+                    delete participants.soldiers[prop]
+                }
+            }
+
+            board.participants = JSON.stringify(participants);
+            await this.save(board);
+            return board;
+        } catch (err) {
+            throw err;
+        }
+
+    }
+
     async soldierParticipate(soldierJoinDto: SoldierJoinDto, user: User): Promise<Board> {
         if (user.type !== AccountTypes.MILLITARY) {
             throw new UnauthorizedException(`Only MILLITARY user allowed, your account type: ${user.type}`);
@@ -147,4 +169,20 @@ export class BoardRepository extends Repository<Board> {
             throw err;
         }
     }
+
+    async soldierCancelParticipation(idx:number, user:User): Promise<Board> {
+        try {
+            const board = await this.findOneBy({idx});
+            const participants = JSON.parse(board.participants);
+
+            delete participants.soldiers[user.identifier];
+            board.participants = JSON.stringify(participants);
+            await this.save(board);
+            return board;
+        } catch (err) {
+            throw err;
+        }
+
+    }
+
 }

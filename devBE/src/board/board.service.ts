@@ -103,8 +103,16 @@ export class BoardService {
     return this.boardRepository.unitParticipate(unitJoinDto, user);
   }
 
+  async unitCancelParticipation(idx: number, user: User): Promise<Board> {
+    return this.boardRepository.unitCancelParticipation(idx, user);
+  }
+
   async soldierParticipate(soldierJoinDto: SoldierJoinDto, user: User): Promise<Board> {
     return this.boardRepository.soldierParticipate(soldierJoinDto, user);
+  }
+
+  async soldierCancelParticipation(idx: number, user: User): Promise<Board> {
+    return this.boardRepository.soldierCancelParticipation(idx, user);
   }
 
 
