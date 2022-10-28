@@ -38,6 +38,22 @@ export class BoardService {
     return found;
   }
 
+  async getAcceptedBoards(user: User): Promise<Board[]> {
+    const found = await this.boardRepository.findBy({acceptedBy: user.identifier});
+    if (!found) {
+      throw new NotFoundException(`Can't find board with user-indentifier: ${user.identifier}`)
+    }
+    return found;
+  }
+
+  async getBoardsByAcceptor(identifier: string): Promise<Board[]> {
+    const found = await this.boardRepository.findBy({ acceptedBy: identifier });
+    if (!found) {
+      throw new NotFoundException(`Can't find board with this identifier: ${identifier}`);
+    }
+    return found;
+  }
+
   async getAllBoards(): Promise<Board[]> {
     return this.boardRepository.find();
   }
@@ -95,8 +111,14 @@ export class BoardService {
     .catch((err) => {
       throw err;
     })
+  }
 
-    
+  async acceptRequest(idx: number, user: User): Promise<Board> {
+    return this.boardRepository.acceptRequest(idx, user);
+  }
+
+  async cancelRequest(idx: number, user: User): Promise<Board> {
+    return this.boardRepository.cancelRequest(idx, user);
   }
 
 
