@@ -3,10 +3,10 @@ import { acceptConverter } from 'src/util/utils';
 import ColorAccept from '../atom/ColorAccept';
 import StatusRow from '../atom/StatusRow';
 
-export default function StatusBody({ post }: { post: Post[] }) {
+export default function StatusBody({ posts }: { posts: Post[] }) {
   return (
     <tbody className="shadow-md">
-      {post.map((post: Post) => (
+      {posts.map((post: Post) => (
         <StatusRow key={post.idx} {...post} />
       ))}
     </tbody>
