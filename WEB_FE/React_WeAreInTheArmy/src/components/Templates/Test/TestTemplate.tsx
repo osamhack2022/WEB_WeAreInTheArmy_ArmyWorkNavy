@@ -5,6 +5,7 @@ import Paper from 'src/components/UI/Paper';
 import { client } from 'src/util/client';
 
 export default function TestTemplate() {
+  console.log(new kakao.maps.services.Places());
   return (
     <div className="w-[900px]">
       <Button

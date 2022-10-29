@@ -68,6 +68,10 @@ export class Board extends BaseEntity {
     @Column({ type: "longtext", nullable: true })
     @ApiProperty({ description: "json data of admin/soldier on the request" })
     participants: string;
+    
+    @Column({ nullable: true })
+    @ApiProperty({ description: "who accepted the request" })
+    acceptedBy: string;
 
     @CreateDateColumn()
     @ApiProperty({ description: "createdAt - auto created" })

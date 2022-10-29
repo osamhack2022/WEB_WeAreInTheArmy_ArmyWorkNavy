@@ -1,6 +1,6 @@
 import {
   RequestCategory,
-  useeApplyDataDispatch,
+  useApplyDataDispatch,
 } from '../../../../context/ApplyContext';
 import FlexContainer from '../../../UI/FlexContantainer';
 import Text from '../../../UI/Text';
@@ -9,7 +9,7 @@ import RequestCategorySelect from '../molecule/RequestCategorySelect';
 import TitleInput from '../molecule/TitleInput';
 
 export default function ApplyDataForm() {
-  const dispatch = useeApplyDataDispatch();
+  const dispatch = useApplyDataDispatch();
   const setTitle = (value: string) =>
     dispatch({ type: 'SET_TITLE', title: value });
   const setRequestCategory = (value: RequestCategory) =>

@@ -49,5 +49,9 @@ export class UpdateBoardDto extends PartialType(CreateBoardDto) {
     @IsObject()
     @ApiProperty({description: "json data of admin/soldier on the request"})
     participants: boolean;
+    
+    @IsString()
+    @ApiProperty({description: "[opt] who accepted the request"})
+    acceptedBy: string;
 
 }

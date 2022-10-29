@@ -22,7 +22,9 @@ export default function RequestCategorySelect({
     <DefaultInformation label={label} isEssential>
       <Select className="w-3/4" onChange={dispatch}>
         {options.map(({ label, value }: Options) => (
-          <Option value={value}>{label}</Option>
+          <Option key={label} value={value}>
+            {label}
+          </Option>
         ))}
       </Select>
     </DefaultInformation>

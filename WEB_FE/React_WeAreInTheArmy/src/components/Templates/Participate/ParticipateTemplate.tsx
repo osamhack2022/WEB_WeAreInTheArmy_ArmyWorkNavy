@@ -1,3 +1,8 @@
+import { Modal } from 'flowbite-react';
+import { ModalFooter } from 'flowbite-react/lib/esm/components/Modal/ModalFooter';
+import { TableBody } from 'flowbite-react/lib/esm/components/Table/TableBody';
+import { TableCell } from 'flowbite-react/lib/esm/components/Table/TableCell';
+import { TableRow } from 'flowbite-react/lib/esm/components/Table/TableRow';
 import { useState } from 'react';
 import Button from 'src/components/UI/Button';
 import DefaultInformation from 'src/components/UI/DefaultInformation';
@@ -6,16 +11,26 @@ import Input from 'src/components/UI/Input';
 import Paper from 'src/components/UI/Paper';
 import SemiHeader from 'src/components/UI/SemiHeader';
 import Text from 'src/components/UI/Text';
+import { usePostState } from 'src/context/PostContext';
+import { Post } from 'src/type';
 import DefaultInformationInput from '../Apply/atom/DefaultInformationInput';
+import StatusHead from '../Status/molecule/StatusHead';
+import StatusTable from '../Status/organism/StatusTable';
 
 export default function ParticipateTemplate() {
   const [count, setCount] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
+  const state = usePostState();
   return (
     <Paper className="w-[900px]">
       <SemiHeader
         title="대민지원 참여하기"
         subTitle="주변 이웃들이 요청한 대민지원에 참여해주세요"
       />
+      <FlexContainer>
+        <Button onClick={() => setOpen(true)}>참여할 대민지원 선택하기</Button>
+      </FlexContainer>
+
       <FlexContainer className="flex-col w-full">
         <div className="p-3">
           <Text size="text-2xl" className="font-bold">
@@ -53,6 +68,23 @@ export default function ParticipateTemplate() {
           <Button>참여하기</Button>
         </FlexContainer>
       </FlexContainer>
+      <Modal show={open}>
+        <Modal.Header>Test</Modal.Header>
+        <Modal.Body>
+          {/* 고쳐야 함 */}
+          <table>
+            <StatusHead />
+            <TableBody>
+              {state.posts.map((post: Post) => (
+                <TableRow>
+                  <TableCell></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </table>
+        </Modal.Body>
+        <ModalFooter>푸터</ModalFooter>
+      </Modal>
     </Paper>
   );
 }

@@ -9,6 +9,8 @@ import { UnitJoinDto } from './dto/unit-join.dto';
 import { SoldierJoinDto } from './dto/soldier-join.dto';
 import { NotAcceptableException } from '@nestjs/common';
 import { SetStatusDto } from './dto/set-status.dto';
+import { Board } from "./entities/board.entity";
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 @CustomRepository(Board)
 export class BoardRepository extends Repository<Board> {
@@ -44,6 +46,7 @@ export class BoardRepository extends Repository<Board> {
         board.status = status || board.status;
         board.done = done || board.done;
         board.participants = JSON.stringify(participants) || board.participants;
+        board.acceptedBy = acceptedBy || board.acceptedBy;
 
         await this.save(board);
         return board;
@@ -119,6 +122,15 @@ export class BoardRepository extends Repository<Board> {
             }
 
             board.participants = JSON.stringify(participants);
+    async acceptRequest(idx: number, user: User): Promise<Board> {
+
+        if (user.type !== (AccountTypes.MILLITARY || AccountTypes.ADMINISTRATOR)) {
+            throw new UnauthorizedException(`Only military user can accpet request`);
+        }
+
+        try {
+            const board = await this.findOne({ where: { idx } });
+            board.acceptedBy = user.identifier;
             await this.save(board);
             return board;
         } catch (err) {
@@ -170,6 +182,14 @@ export class BoardRepository extends Repository<Board> {
             await this.save(board);
             return board;
 
+    }
+
+    async cancelRequest(idx: number, user: User): Promise<Board> {
+        try {
+            const board = await this.findOne({ where: { idx, acceptedBy: user.identifier } });
+            board.acceptedBy = null;
+            await this.save(board);
+            return board;
         } catch (err) {
             throw err;
         }
@@ -218,5 +238,5 @@ export class BoardRepository extends Repository<Board> {
             throw err;
         }
     }
-
+n
 }

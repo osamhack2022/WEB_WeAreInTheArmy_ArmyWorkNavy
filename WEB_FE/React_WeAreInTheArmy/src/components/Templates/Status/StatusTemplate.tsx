@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Divider from 'src/components/UI/Divider';
 import FlexContainer from 'src/components/UI/FlexContantainer';
 import Paper from 'src/components/UI/Paper';
 import SemiHeader from 'src/components/UI/SemiHeader';
+import { usePostState } from 'src/context/PostContext';
 import { Accept, Post } from 'src/type';
+import { client } from 'src/util/client';
 import StatusBody from './molecule/StatusBody';
 import StatusHead from './molecule/StatusHead';
 
 export default function StatusTemplate() {
-  const [post, setPost] = useState<Post[]>([]);
+  const state = usePostState();
+  const { posts } = state;
   return (
     <Paper className="w-[900px]">
       <SemiHeader
@@ -17,12 +20,10 @@ export default function StatusTemplate() {
       />
       <Divider />
       <FlexContainer className="flex-col w-full p-4">
-        <div className="mb-3">{post.length}개의 게시물이 있습니다.</div>
+        <div className="mb-3">{posts.length}개의 게시물이 있습니다.</div>
         <table>
           <StatusHead />
-          <StatusBody
-            post={[{ id: 1, accept: Accept.Accept, title: '안녕' }]}
-          />
+          <StatusBody posts={posts} />
         </table>
       </FlexContainer>
     </Paper>
