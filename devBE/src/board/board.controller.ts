@@ -22,9 +22,6 @@ import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
-import { UnitJoinDto } from './dto/unit-join.dto';
-import { SoldierJoinDto } from './dto/soldier-join.dto';
-import { SetStatusDto } from './dto/set-status.dto';
 
 @Controller('/absproxy/3000/api/board')
 @ApiTags('Boards API')
@@ -64,20 +61,10 @@ export class BoardController {
 		return this.boardService.getAllBoards();
 	}
 
-  @Get("/getAllUndoneBoards")
-  getAllUndoneBoards(): Promise<Board[]> {
-    return this.boardService.getAllUndoneBoards();
-  }
-
-  @Get("/getBoardsByIdentifier/:identifier")
-  getBoardsByIdentifier(@Param("identifier") identifier: string, @Req() req): Promise<Board[]> {
-    return this.boardService.getBoardsbyIdentifier(identifier);
-  }
-
-  @Get("/getBoardsByAuth")
-  getBoardsById(@Req() req): Promise<Board[]> {
-    return this.boardService.getBoardsbyIdentifier(req.user.identifier);
-  }
+	@Get('/getBoardsByAuth')
+	getBoardsById(@Req() req): Promise<Board[]> {
+		return this.boardService.getBoardsbyId(req.user);
+	}
 
 	@Get('/getBoardByIndex/:idx')
 	getBoardByIdx(@Param('idx') idx: number): Promise<Board> {
@@ -110,42 +97,6 @@ export class BoardController {
 		return this.boardService.acceptRequest(idx, req.user);
 	}
 
-  @Patch("/unitParticipate")
-  @UsePipes(ValidationPipe)
-  unitParticipate(@Body() unitJoinDto: UnitJoinDto, @Req() req): Promise<Board> {
-    return this.boardService.unitParticipate(unitJoinDto, req.user);
-  }
-
-  @Patch("/unitCancelParticipation/:idx")
-  @UsePipes(ValidationPipe)
-  unitCancelParticipation(@Param("idx") idx:number, @Req() req): Promise<Board> {
-    return this.boardService.unitCancelParticipation(idx, req.user);
-  }
-
-  @Patch("/soldierParticipate")
-  @UsePipes(ValidationPipe)
-  soldierParticipate(@Body() soldierJoinDto: SoldierJoinDto, @Req() req): Promise<Board> {
-    return this.boardService.soldierParticipate(soldierJoinDto, req.user);
-  }
-
-  @Patch("/soldierCancelParticipation/:idx")
-  @UsePipes(ValidationPipe)
-  soldierCancelParticipation(@Param("idx") idx:number, @Req() req): Promise<Board> {
-    return this.boardService.soldierCancelParticipation(idx, req.user);
-  }
-
-  @Patch("/setStatus")
-  @UsePipes(ValidationPipe)
-  setStatus(@Body() setStatusDto: SetStatusDto, @Req() req): Promise<Board> {
-    return this.boardService.setStatus(setStatusDto, req.user);
-  }
-
-  @Patch("/setDone/:idx")
-  @UsePipes(ValidationPipe)
-  setDone(@Param("idx") idx: number, @Req() req): Promise<Board> {
-    return this.boardService.setDone(idx, req.user);
-  }
-  
 	@Patch('/cancelRequest/:idx')
 	@UsePipes(ValidationPipe)
 	cancelRequest(
