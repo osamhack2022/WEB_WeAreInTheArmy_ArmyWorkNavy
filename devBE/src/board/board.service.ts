@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UploadedFiles } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
@@ -9,6 +9,9 @@ import { createImageURL } from 'src/configs/multer.config';
 import { unlink,  } from 'fs';
 import { basename, join } from 'path';
 import { readFile, writeFile } from 'fs/promises';
+import { UnitJoinDto } from './dto/unit-join.dto';
+import { SoldierJoinDto } from './dto/soldier-join.dto';
+import { SetStatusDto } from './dto/set-status.dto';
 
 @Injectable()
 export class BoardService {
@@ -58,8 +61,12 @@ export class BoardService {
     return this.boardRepository.find();
   }
 
-  async getBoardsbyId(user: User): Promise<Board[]> {
-    return this.boardRepository.getBoardsById(user);
+  async getAllUndoneBoards(): Promise<Board[]> {
+    return this.boardRepository.findBy({done:false});
+  }
+
+  async getBoardsbyIdentifier(identifier: string): Promise<Board[]> {
+    return this.boardRepository.getBoardsByIdentifier(identifier);
   }
 
   uploadImages(files: File[]): object {
@@ -113,6 +120,28 @@ export class BoardService {
     })
   }
 
+  async unitParticipate(unitJoinDto: UnitJoinDto, user: User): Promise<Board> {
+    return this.boardRepository.unitParticipate(unitJoinDto, user);
+  }
+
+  async unitCancelParticipation(idx: number, user: User): Promise<Board> {
+    return this.boardRepository.unitCancelParticipation(idx, user);
+  }
+
+  async soldierParticipate(soldierJoinDto: SoldierJoinDto, user: User): Promise<Board> {
+    return this.boardRepository.soldierParticipate(soldierJoinDto, user);
+  }
+
+  async soldierCancelParticipation(idx: number, user: User): Promise<Board> {
+    return this.boardRepository.soldierCancelParticipation(idx, user);
+  }
+
+  async setStatus(setStatusDto: SetStatusDto, user:User): Promise<Board> {
+    return this.boardRepository.setStatus(setStatusDto, user);
+  }
+
+  async setDone(idx:number, user:User): Promise<Board> {
+    return this.boardRepository.setDone(idx, user);
   async acceptRequest(idx: number, user: User): Promise<Board> {
     return this.boardRepository.acceptRequest(idx, user);
   }
