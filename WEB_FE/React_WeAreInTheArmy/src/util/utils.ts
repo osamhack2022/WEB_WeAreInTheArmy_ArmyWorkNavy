@@ -1,4 +1,5 @@
 import { Accept } from 'src/type';
+import { client } from './client';
 
 export const acceptConverter = (accept: Accept): string => {
   switch (accept) {
@@ -12,3 +13,15 @@ export const acceptConverter = (accept: Accept): string => {
       return 'Error';
   }
 };
+
+export function setAuthroizationToken(token: string) {
+  if (token) {
+    client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete client.defaults.headers.common['Authoization'];
+  }
+}
+
+export function isoStringToYYYYMMDD(isoString: string) {
+  return isoString.substring(0, 10);
+}

@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import Button from 'src/components/UI/Button';
+import { client } from 'src/util/client';
 import {
   useApplyDataState,
   useDefaultInformationState,
@@ -10,10 +12,39 @@ import AgreePersonData from './organism/AgreePersonData';
 import ApplyDataForm from './organism/ApplyDataForm';
 import DefaultInformationForm from './organism/DefaultInformationForm';
 
+// {
+//   "type": "string",
+//   "title": "string",
+//   "description": "string",
+//   "location": "string",
+//   "admit": true,
+//   "image": "string"
+// }
+
 export default function ApplyTemplate() {
   const defaultInformationState = useDefaultInformationState();
   const applyDataState = useApplyDataState();
   console.log(defaultInformationState, applyDataState);
+  const createBoard = () => {
+    console.log(client.defaults);
+    client.post(
+      '/absproxy/3000/api/board/createBoard',
+      {
+        type: applyDataState.requestCategory,
+        title: applyDataState.title,
+        description: applyDataState.description,
+        location: defaultInformationState.location,
+        admit: true,
+        image: 'string',
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
+        },
+      },
+    );
+  };
+  const navigate = useNavigate();
   return (
     <Paper className="w-[900px]">
       <SemiHeader
@@ -27,8 +58,12 @@ export default function ApplyTemplate() {
         <AgreePersonData />
       </FlexContainer>
       <FlexContainer className="my-5 justify-between w-full px-5">
-        <Button size="lg">취소하기</Button>
-        <Button size="lg">제출하기</Button>
+        <Button size="lg" onClick={() => navigate('/')}>
+          취소하기
+        </Button>
+        <Button size="lg" onClick={createBoard}>
+          제출하기
+        </Button>
       </FlexContainer>
     </Paper>
   );

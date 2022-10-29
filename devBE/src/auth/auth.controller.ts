@@ -1,31 +1,26 @@
 import {
+	Body,
 	Controller,
 	Get,
 	Post,
-	Body,
-	Patch,
-	Param,
-	Delete,
-	ValidationPipe,
 	Req,
 	UseGuards,
+	ValidationPipe,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateAuthDto } from './dto/update-user.dto';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { User } from './entities/users.entity';
+import { AuthService } from './auth.service';
+import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
-@Controller('api/auth/')
+@Controller('absproxy/3000/api/auth/')
 @ApiTags('Users and Authentication API')
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
 	@Post('/signup')
 	@ApiOperation({ summary: 'createUser API' })
-	signUp(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<CreateUserDto> {
+	signUp(@Body(ValidationPipe) createUserDto: CreateUserDto): Promise<void> {
 		return this.authService.signUp(createUserDto);
 	}
 
@@ -33,21 +28,20 @@ export class AuthController {
 	@ApiOperation({ summary: 'authenticateCredentials API' })
 	signIn(
 		@Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-	): Promise<{ user:User, accessToken: string }> {
+	): Promise<{ accessToken: string }> {
 		return this.authService.signIn(authCredentialsDto);
 	}
 
-	@Get('/getUserInfo/:identifier')
-	@ApiOperation({ summary: 'get user object from identifier' })
-	getUserInfo(@Param("identifier") identifier:string): Promise<User> {
-		return this.authService.getUserInfo(identifier);
-	}
-
-	@Get('/getUserInfoByAuth')
+	@Post('/test')
 	@UseGuards(AuthGuard())
 	@ApiOperation({ summary: 'get user object from authenticated client API' })
-	getUserInfoByAuth(@Req() req): Promise<User> {
-		return req.user;
+	test(@Req() req) {
+		console.log('req', req.user);
+	}
+
+	@Get('/hello')
+	hello() {
+		return 'hello';
 	}
 
 	/*

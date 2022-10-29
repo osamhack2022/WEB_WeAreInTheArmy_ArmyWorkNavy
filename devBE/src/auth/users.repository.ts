@@ -8,17 +8,17 @@ import * as bcrypt from "bcryptjs";
 @CustomRepository(User)
 export class UsersRepository extends Repository<User> {
 
-    async createUser(createUserDto: CreateUserDto): Promise<CreateUserDto> {
+    async createUser(createUserDto: CreateUserDto): Promise<void> {
 
         const { identifier, password, type, name, phone, organization, email, address } = createUserDto;
 
         const salt = await bcrypt.genSalt();
         const hash = await bcrypt.hash(password, salt);
-        const user = { identifier, password: hash, type, name, phone, organization, email, address };
-        const userCreateSql = this.create(user);
+
+        const user = this.create({ identifier, password: hash, type, name, phone, organization, email, address });
 
         try {
-            await this.save(userCreateSql);
+            await this.save(user);
         } catch (error) {
             if (error.errno === 1062) {
                 throw new ConflictException("The username already exists.");
@@ -26,7 +26,5 @@ export class UsersRepository extends Repository<User> {
                 throw new InternalServerErrorException();
             }
         }
-
-        return user;
     }
 }
