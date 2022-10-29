@@ -29,6 +29,7 @@ export class BoardService {
     this.boardRepository.deleteBoard(idx, user);
   }
 
+  
   async updateBoard(idx: number, updateBoardDto: UpdateBoardDto, user: User): Promise<Board> {
     return this.boardRepository.updateBoard(idx, updateBoardDto, user);
   }
